@@ -19,6 +19,9 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+```{r}
+options(repos=c("http://ran.synapse.org", "http://cran.fhcrc.org"))
+```
 Author: Laura Heath / Sage Bionetworks
 
 
