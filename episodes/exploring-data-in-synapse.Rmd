@@ -27,12 +27,15 @@ Author: Laura Heath / Sage Bionetworks
 
 # Downloading and Exploring Data from Synapse
 
-Before you begin, determine your working directory (get(wd) and set(wd)), and create two new folders within your preferred working directory entitled "data" and "results"
+Before you begin, determine your working directory (`get(wd)` and `set(wd)`), and 
+create two new folders within your preferred working directory entitled `data`
+and `results`.
 
 ## Install and Load Packages
 
-If you haven't already, install synapser (the Synapse R client), as well
-as the tidyverse family of packages
+If you haven't already, install `synapser` (the Synapse R client), as well
+as the `tidyverse` family of packages
+
 ```{r}
 # install synapser
 install.packages("synapser", repos = c("http://ran.synapse.org", "http://cran.fhcrc.org"))
