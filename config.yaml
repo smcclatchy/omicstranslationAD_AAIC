@@ -14,7 +14,7 @@ carpentry: ''
 title: 'Omics Translation in AD' # FIXME
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ 2024-07-24
+created: 2024-07-24
 
 # Comma-separated list of keywords for the lesson
 keywords: 'Alzheimers, data, lesson, MODEL-AD' 
