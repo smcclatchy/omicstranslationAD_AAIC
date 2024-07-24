@@ -60,6 +60,7 @@ contact: 'team@carpentries.org' # FIXME
 # Order of episodes in your lesson
 episodes: 
 - introduction.md
+- exploring-data-in-synapse.Rmd
 
 # Information for Learners
 learners: 
