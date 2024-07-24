@@ -1,24 +1,23 @@
 ---
-source: Rmd
-title: "Synapse and AD Knowledge Portal"
+title: 'Synapse and AD Knowledge Portal'
 teaching: 40
 exercises: 10
-questions:
-- "How to work with Synapse R client?"
-- "How to work with data in AD Knowledge Portal?"
-objectives:
-- "Explain how to use Synapser Package."
-- "Demonstrate how to locate data and metadata in the Portal."
-- "Demonstrate how to download data from the Portal programmatically."
-keypoints:
-- "Use your Synapse login credentials to access the Portal."
-- "Use Synapser package to download data from the Portal."
 ---
 
-```{r, include=FALSE}
-source("../bin/chunk-options.R")
-knitr_fig_path("02-")
-```
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to work with Synapse R client?
+- How to work with data in AD Knowledge Portal?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain how to use Synapser Package.
+- Demonstrate how to locate data and metadata in the Portal.
+- Demonstrate how to download data from the Portal programmatically.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 Author: Laura Heath / Sage Bionetworks
 
@@ -407,6 +406,12 @@ counts %>%
   as_tibble(rownames = "specimenID") %>% 
   left_join(joined_meta, by = "specimenID")
 ```
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use your Synapse login credentials to access the Portal.
+- Use Synapser package to download data from the Portal.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Session Info
 ```{r}
