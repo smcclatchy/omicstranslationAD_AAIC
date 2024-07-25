@@ -208,7 +208,7 @@ What are other ways to count genes in each module?
 :::::::::::::::::::::::: solution 
 
 ```r
-dplyr::count(module_table ,Module)
+dplyr::count(module_table, Module)
 ```
 
 :::::::::::::::::::::::::::::::::
@@ -282,6 +282,7 @@ head(ampad_modules)
 ## Challenge 2
 
 How many human genes are we removing that don't have identified orthologs? 
+
 :::::::::::::::::::::::: solution 
 
 ```r
@@ -468,7 +469,8 @@ For this lesson we are going to use the first approach.
 We'll first read the result table saved after differential analysis in last [lesson](https://asliuyar.github.io/omicsTranslationAD/03-DESeq/index.html). 
 We'll start with the data from the 5xFAD mouse model to understand the required 
 steps to perform the correlation with human AD modules.
-```{r FAD}
+
+```{r FAD, eval=FALSE}
 load("results/DEAnalysis_5XFAD.Rdata")
 ```
 
@@ -666,7 +668,7 @@ dev.off()
 ```
 
 
-![AMPAD - 5XFAD correlation plot](../results/AMPAD1.png)
+![AMPAD - 5XFAD correlation plot](results/AMPAD1.png)
 
 In the above plot, categories along the x-axis are the 30 AMP-AD co-expression 
 modules grouped into 5 consensus clusters, while the categories along the y-axis 
@@ -939,7 +941,7 @@ correction in one function.
 Let's start by considering the enrichments from the mouse data analyzed 
 previously. 
 
-```{r}
+```{r, eval=FALSE}
 theme_set(theme_bw())
 load('results/DEAnalysis_5XFAD.RData')
 ```
@@ -1312,6 +1314,7 @@ dev.off()
 ## Challenge 6
 
 How could you plot the results from the ORA to show biodomain enrichements?
+
 :::::::::::::::::::::::: solution 
 
 ```r
@@ -1345,6 +1348,7 @@ How could you plot the results from the ORA to show biodomain enrichements?
    scale_y_discrete(drop = F)+
    scale_fill_identity()+scale_color_identity()
 ```
+
 Based on the gene list (up or down) we can add a sign to the significance. When we plot this we can see there are many more significantly enriched terms from the ORA. The dominant signal is still the up-regulation of terms from the `Immune Response` biodomain. There is also nearly exclusive up-regulation of terms from the `Autophagy`, `Metal Binding and Homeostasis`, `Oxidative Stress`, and `APP Metabolism` domains. The most down-regulated terms are from the `Synapse` biodomain.
 
 :::::::::::::::::::::::::::::::::
