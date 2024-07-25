@@ -12,16 +12,16 @@ RStudio development environment.
 
 ### R
 
-Please download and install [R](https://cran.r-project.org/). To interact with R, we use 
-[RStudio](https://posit.co/download/rstudio-desktop/). If you don't have administrative 
-rights to your laptop, please ask the IT help desk to install software for you. Once 
-you have installed R and RStudio, open RStudio to verify that the installation 
-was successful.
+Please download and install [R](https://cran.r-project.org/). To interact with 
+R, we use [RStudio](https://posit.co/download/rstudio-desktop/). If you don't 
+have administrative rights to your laptop, please ask the IT help desk to 
+install software for you. Once you have installed R and RStudio, open RStudio to 
+verify that the installation was successful.
 
 ### Package Installation
 
-Next, install the required packages for this lesson. In RStudio, copy and paste the 
-following commands into the Console:
+Next, install the required packages for this lesson. In RStudio, copy and paste 
+the following commands into the Console:
 
 ```r
 # install synapser
@@ -29,6 +29,7 @@ install.packages("synapser", repos = c("http://ran.synapse.org", "http://cran.fh
 
 # install tidyverse if you don't already have it
 install.packages("tidyverse")
+install.packages("dplyr")
 install.packages("lubridate")
 ```
 
@@ -38,13 +39,16 @@ the console to verify that packages installed correctly.
 ```r
 library(synapser)
 library(tidyverse)
+library(dplyr)
+library(lubridate)
 ```
 
 Next, you will need to log in to your Synapse account.
 
-*Login option 1*: Synapser takes credentials from your Synapse web session. If you are 
-logged into the Synapse web browser, synapser will automatically use your login 
-credentials to log you in during your R session! All you have to do is:
+*Login option 1*: Synapser takes credentials from your Synapse web session. If 
+you are logged into the Synapse web browser, synapser will automatically use 
+your login credentials to log you in during your R session! All you have to do 
+is:
 
 ```r
 synLogin()
@@ -52,8 +56,8 @@ synLogin()
 
 If for whatever reason that didn’t work, try one of these options:
 
-*Login option 2*: Synapse username and password In the code below, replace the `< >` with 
-your Synapse username and password.
+*Login option 2*: Synapse username and password In the code below, replace the 
+`< >` with your Synapse username and password.
 
 ```r
 synLogin("<username>", "<password>")
