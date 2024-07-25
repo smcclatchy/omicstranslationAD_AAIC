@@ -63,7 +63,7 @@ The 'omics comparisons allow for a much richer contrast, since a significant
 portion of genes are shared between these two species. Homology at the 
 anatomical and neuropathological levels is less clear.  
 
-![Aligning Human and Mouse Phenotypes](../fig/rmd04-dimensions_of_model_alignment.png)
+![Aligning Human and Mouse Phenotypes](fig/rmd04-dimensions_of_model_alignment.png)
 
 ## Overview of Human cohort data
 
@@ -93,7 +93,7 @@ These samples are generally balanced for AD, MCI, and non-affected controls. The
 data provide a broad assessment on how AD affects multiple brain regions in 3 
 different populations in the US.  
 
-![Transcriptomic studies of Alzheimer's Disease](../fig/rmd04-ampad_studies_regions.png)
+![Transcriptomic studies of Alzheimer's Disease](fig/rmd04-ampad_studies_regions.png)
 
 Today we'll consider two different approaches to compare gene expression between 
 human cohorts and model systems:
@@ -129,7 +129,7 @@ modules using expression-weighted cell type enrichment analysis
 ([Skene and Grant, 2016](https://doi.org/10.3389/fnins.2016.00016)) and examined 
 enrichment of functional annotations within the modules.
 
-![AMP-AD GENE Modules](../fig/rmd04-consensus_clusters.png)
+![AMP-AD GENE Modules](fig/rmd04-consensus_clusters.png)
 
 This figure shows a matrix view of gene content overlap between the 30 
 co-expression modules. You'll note a few strongly overlapping group of modules, 
@@ -431,7 +431,7 @@ As demonstrated in the plots below, we'll aim to identify modules where the gene
 expression is correlated between human and mouse orthologs (left) as well as 
 modules where there is no correlation (right). 
 
-![Human-mouse logFCcorrelation](../fig/rmd04-hs_mm_logfc_correlation.png)
+![Human-mouse logFCcorrelation](fig/rmd04-hs_mm_logfc_correlation.png)
 
 There are two approaches that we commonly use to compute correlation between 
 mouse data and human AD data:  
@@ -894,7 +894,7 @@ most common broad classes of tests are *over-representation analysis (ORA)* and
 from [Zhao & Rhee, Trends in Genetics (2023)](https://doi.org/10.1016/j.tig.2023.01.003). 
 Let's consider each in a bit more detail.  
 
-![Functional enrichment approaches](../fig/rmd04-Zhao_Rhee_TrendsGenetics_pathway_enrichment.jpg)
+![Functional enrichment approaches](fig/rmd04-Zhao_Rhee_TrendsGenetics_pathway_enrichment.jpg)
 
 ### Over-representation analysis
 
@@ -1103,7 +1103,7 @@ They examine how the results of functional enrichment analyses are reported in
 the literature, and identify several common shortcomings. Watch out for these 
 common mistakes when performing and reporting your own analyses!  
 
-![Common pitfalls](../fig/rmd04-Wijesooriya_PLOS_CompBio_F2_cropped.png)
+![Common pitfalls](fig/rmd04-Wijesooriya_PLOS_CompBio_F2_cropped.png)
 
 ## Alzheimers's Disease Biological Domains
 
@@ -1116,16 +1116,16 @@ detected within human Alzheimer's cohorts across omics data types
 (transcriptomics, proteomics, and genetics). Several of these endophenotypic 
 areas are shown in the figure below (source: Jesse Wiley).  
 
-![Endophenotypes of AD](../fig/rmd04-AD_endophenotypes.png)
+![Endophenotypes of AD](fig/rmd04-AD_endophenotypes.png)
 
 These endophenotypes describe molecular processes that are dysregulated by or 
 during the disease process. Very similar sets of endophenotypes have been 
 cataloged among the targets of therapeutics in clinical trials for AD 
 (see below, [Cummings et al, Alzheimer's disease drug development pipeline: 2023, Alz Dem TRCI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10210334/).  
 
-![Common AD Research Ontology](../fig/rmd04-CADRO_2023.jpg)
+![Common AD Research Ontology](fig/rmd04-CADRO_2023.jpg)
 
-![Drugs in Pipeline by CADRO](../fig/rmd04-CADRO_2023_2.jpg)
+![Drugs in Pipeline by CADRO](fig/rmd04-CADRO_2023_2.jpg)
 
 In order to formalize and operationalize these endophenotypic areas, the 
 [Emory-Sage-SGC center of the TREAT-AD consortium](treatad.org/emory-sage-sgc/) 
@@ -1153,7 +1153,7 @@ between biological domains is quite a bit higher (panel B). The development of
 the biological domains is described in more detail in the published paper 
 [Genetic and Multi-omic Risk Assessment of Alzheimer’s Disease Implicates Core Associated Biological Domains](doi.org/10.1002/trc2.12461). 
 
-![AD Biodomain Demographics](../fig/rmd04-score_domains_preprint_F1_cropped.jpeg)
+![AD Biodomain Demographics](fig/rmd04-score_domains_preprint_F1_cropped.jpeg)
 
 ### Download and explore the biological domain annotations
 
