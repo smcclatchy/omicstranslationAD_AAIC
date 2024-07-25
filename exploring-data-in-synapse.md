@@ -19,6 +19,23 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+``` output
+
+Attaching package: 'dplyr'
+```
+
+``` output
+The following objects are masked from 'package:stats':
+
+    filter, lag
+```
+
+``` output
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+```
 ## Working with AD Portal metadata 
 
 **Metadata basics** 
@@ -42,16 +59,38 @@ individual, biospecimen, and RNAseq assay metadata files.
 
 ``` r
 # counts matrix
-counts <- read_tsv("../data/htseqcounts_5XFAD.txt", show_col_types = FALSE)
+counts <- read_tsv("data/htseqcounts_5XFAD.txt", show_col_types = FALSE)
+```
 
+``` error
+Error in read_tsv("data/htseqcounts_5XFAD.txt", show_col_types = FALSE): could not find function "read_tsv"
+```
+
+``` r
 # individual metadata
-ind_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE)
+ind_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE)
+```
 
+``` error
+Error in read_csv("data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE): could not find function "read_csv"
+```
+
+``` r
 # biospecimen metadata
-bio_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE)
+bio_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE)
+```
 
+``` error
+Error in read_csv("data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE): could not find function "read_csv"
+```
+
+``` r
 #assay metadata
-rna_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", show_col_types = FALSE)
+rna_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", show_col_types = FALSE)
+```
+
+``` error
+Error in read_csv("data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", : could not find function "read_csv"
 ```
 
 Let’s examine the data and metadata files a bit before we begin our
@@ -64,6 +103,10 @@ analyses.
 counts
 ```
 
+``` error
+Error in eval(expr, envir, enclos): object 'counts' not found
+```
+
 The data file has a column of ENSEMBL gene ids and then a bunch of
 columns with count data, where the column headers correspond to the
 specimenIDs. These specimenIDs should all be in the RNAseq assay
@@ -74,10 +117,18 @@ metadata file, so let’s check.
 rna_meta
 ```
 
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
+```
+
 
 ``` r
 # are all the column headers from the counts matrix (except the first "gene_id" column) in the assay metadata?
 all(colnames(counts[-1]) %in% rna_meta$specimenID)
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'counts' not found
 ```
 
 **Assay metadata** 
@@ -91,16 +142,28 @@ unique sample. We can use some tools from dplyr to explore the metadata.
 n_distinct(rna_meta$specimenID)
 ```
 
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
+```
+
 
 ``` r
 # were the samples all sequenced on the same platform?
 distinct(rna_meta, platform)
 ```
 
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
+```
+
 
 ``` r
 # were there multiple sequencing batches reported?
 distinct(rna_meta, sequencingBatch) 
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
 ```
 
 **Biospecimen metadata** 
@@ -114,10 +177,18 @@ it was prepared, etc. Each specimenID is mapped to an individualID.
 all(rna_meta$specimenID %in% bio_meta$specimenID)
 ```
 
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
+```
+
 
 ``` r
 # but the biospecimen file also contains specimens from different assays
 all(bio_meta$specimenID %in% rna_meta$specimenID)
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'bio_meta' not found
 ```
 
 **Individual metadata** 
@@ -128,15 +199,24 @@ For humans, this includes information on age, sex, race, diagnosis, etc.
 For MODEL-AD mouse models, the individual metadata has information on
 model genotypes, stock numbers, diet, and more.
 
+
 ``` r
 # all individualIDs in the biospecimen file should be in the individual file
 all(bio_meta$individualID %in% ind_meta$individualID)
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'bio_meta' not found
 ```
 
 
 ``` r
 # which model genotypes are in this study?
 distinct(ind_meta, genotype)
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'ind_meta' not found
 ```
 
 **Joining metadata** 
@@ -158,8 +238,18 @@ for more info on piping in R.
 joined_meta <- rna_meta %>% #start with the rnaseq assay metadata
   left_join(bio_meta, by = "specimenID") %>%  #join rows from biospecimen that match specimenID 
   left_join(ind_meta, by = "individualID") # join rows from individual that match individualID
+```
 
+``` error
+Error in eval(expr, envir, enclos): object 'rna_meta' not found
+```
+
+``` r
 joined_meta
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'joined_meta' not found
 ```
 
 We now have a very wide dataframe that contains all the available
@@ -170,7 +260,20 @@ individuals and specimens as needed based on your analysis criteria!
 
 ``` r
 library(lubridate)
+```
 
+``` output
+
+Attaching package: 'lubridate'
+```
+
+``` output
+The following objects are masked from 'package:base':
+
+    date, intersect, setdiff, union
+```
+
+``` r
 # convert columns of strings to month-date-year format
 joined_meta_time <- joined_meta %>% 
   mutate(dateBirth = mdy(dateBirth), dateDeath = mdy(dateDeath)) %>% 
@@ -180,18 +283,45 @@ joined_meta_time <- joined_meta %>%
   mutate(timepoint = case_when(timepoint > 10 ~ "12 mo",
                                timepoint < 10 & timepoint > 5 ~ "6 mo",
                                timepoint < 5 ~ "4 mo"))
+```
 
+``` error
+Error in eval(expr, envir, enclos): object 'joined_meta' not found
+```
+
+``` r
 covars_5XFAD <- joined_meta_time %>%
   dplyr::select(individualID, specimenID, sex, genotype, timepoint) %>% distinct() %>% as.data.frame()
-rownames(covars_5XFAD) <- covars_5XFAD$specimenID
+```
 
+``` error
+Error in eval(expr, envir, enclos): object 'joined_meta_time' not found
+```
+
+``` r
+rownames(covars_5XFAD) <- covars_5XFAD$specimenID
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
+```
+
+``` r
 head(covars_5XFAD)
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
 ```
 
 We will save joined_meta for the next lesson.
 
 ``` r
-saveRDS(covars_5XFAD, file = "../data/covars_5XFAD.rds")
+saveRDS(covars_5XFAD, file = "data/covars_5XFAD.rds")
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
 ```
 
 ## Single Specimen files
@@ -265,6 +395,7 @@ annotations_table %>%
 ```
 The multispecimen file should contain a row or column of specimenIDs that correspond to the specimenIDs used in a study’s metadata, as we have seen with the 5XFAD counts file.
 
+
 ``` r
 # In this example, we take a slice of the counts data to reduce computation, transpose it so that each row represents a single specimen, and then join it to the joined metadata by the specimenID
 counts %>% 
@@ -272,6 +403,10 @@ counts %>%
   t() %>% 
   as_tibble(rownames = "specimenID") %>% 
   left_join(joined_meta, by = "specimenID")
+```
+
+``` error
+Error in eval(expr, envir, enclos): object 'counts' not found
 ```
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
@@ -307,7 +442,14 @@ tzcode source: system (glibc)
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] lubridate_1.9.3 dplyr_1.1.4    
+
 loaded via a namespace (and not attached):
-[1] compiler_4.4.1  tools_4.4.1     yaml_2.3.9      knitr_1.48     
-[5] xfun_0.46       renv_1.0.7      evaluate_0.24.0
+ [1] utf8_1.2.4       R6_2.5.1         tidyselect_1.2.1 xfun_0.46       
+ [5] magrittr_2.0.3   glue_1.7.0       tibble_3.2.1     knitr_1.48      
+ [9] pkgconfig_2.0.3  timechange_0.3.0 generics_0.1.3   lifecycle_1.0.4 
+[13] cli_3.6.3        fansi_1.0.6      vctrs_0.6.5      renv_1.0.7      
+[17] compiler_4.4.1   tools_4.4.1      evaluate_0.24.0  pillar_1.9.0    
+[21] yaml_2.3.9       rlang_1.1.4     
 ```
