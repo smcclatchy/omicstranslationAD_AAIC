@@ -196,7 +196,7 @@ What are other ways to count genes in each module?
 :::::::::::::::::::::::: solution 
 
 ```r
-dplyr::count(module_table ,Module)
+dplyr::count(module_table, Module)
 ```
 
 :::::::::::::::::::::::::::::::::
@@ -277,6 +277,7 @@ head(ampad_modules)
 ## Challenge 2
 
 How many human genes are we removing that don't have identified orthologs? 
+
 :::::::::::::::::::::::: solution 
 
 ```r
@@ -473,17 +474,9 @@ We'll first read the result table saved after differential analysis in last [les
 We'll start with the data from the 5xFAD mouse model to understand the required 
 steps to perform the correlation with human AD modules.
 
+
 ``` r
 load("results/DEAnalysis_5XFAD.Rdata")
-```
-
-``` warning
-Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-'results/DEAnalysis_5XFAD.Rdata', probable reason 'No such file or directory'
-```
-
-``` error
-Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
 ```
 
 We can also load AMP-AD module data.
@@ -668,7 +661,7 @@ ggplot2::ggplot() +
 
 
 
-![AMPAD - 5XFAD correlation plot](../results/AMPAD1.png)
+![AMPAD - 5XFAD correlation plot](results/AMPAD1.png)
 
 In the above plot, categories along the x-axis are the 30 AMP-AD co-expression 
 modules grouped into 5 consensus clusters, while the categories along the y-axis 
@@ -899,23 +892,7 @@ previously.
 
 ``` r
 theme_set(theme_bw())
-```
-
-``` error
-Error in theme_set(theme_bw()): could not find function "theme_set"
-```
-
-``` r
 load('results/DEAnalysis_5XFAD.RData')
-```
-
-``` warning
-Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-'results/DEAnalysis_5XFAD.RData', probable reason 'No such file or directory'
-```
-
-``` error
-Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
 ```
 
 We'll start by considering the genes that are significantly DE in 12 month old 
@@ -1276,6 +1253,7 @@ ggplot(enr.bd_plot, aes(NES, Biodomain)) +
 ## Challenge 6
 
 How could you plot the results from the ORA to show biodomain enrichements?
+
 :::::::::::::::::::::::: solution 
 
 ```r
@@ -1309,6 +1287,7 @@ How could you plot the results from the ORA to show biodomain enrichements?
    scale_y_discrete(drop = F)+
    scale_fill_identity()+scale_color_identity()
 ```
+
 Based on the gene list (up or down) we can add a sign to the significance. When we plot this we can see there are many more significantly enriched terms from the ORA. The dominant signal is still the up-regulation of terms from the `Immune Response` biodomain. There is also nearly exclusive up-regulation of terms from the `Autophagy`, `Metal Binding and Homeostasis`, `Oxidative Stress`, and `APP Metabolism` domains. The most down-regulated terms are from the `Synapse` biodomain.
 
 :::::::::::::::::::::::::::::::::
