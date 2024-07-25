@@ -66,8 +66,20 @@ identify distinct groups using sample metadata
 distinct(covars, sex, genotype, timepoint)
 ```
 
-``` error
-Error in distinct(covars, sex, genotype, timepoint): could not find function "distinct"
+``` output
+           sex         genotype timepoint
+32043rh female    5XFAD_carrier     12 mo
+32044rh   male 5XFAD_noncarrier     12 mo
+32049rh female 5XFAD_noncarrier     12 mo
+46105rh female 5XFAD_noncarrier      6 mo
+46108rh   male 5XFAD_noncarrier      6 mo
+46131rh female 5XFAD_noncarrier      4 mo
+46877rh   male 5XFAD_noncarrier      4 mo
+46887rh female    5XFAD_carrier      4 mo
+32053rh   male    5XFAD_carrier     12 mo
+46111rh female    5XFAD_carrier      6 mo
+46865rh   male    5XFAD_carrier      6 mo
+46866rh   male    5XFAD_carrier      4 mo
 ```
 
 How many mice were used to produce this data?
@@ -77,8 +89,23 @@ covars %>% group_by(sex,genotype,timepoint) %>%
   dplyr::count()
 ```
 
-``` error
-Error in covars %>% group_by(sex, genotype, timepoint) %>% dplyr::count(): could not find function "%>%"
+``` output
+# A tibble: 12 × 4
+# Groups:   sex, genotype, timepoint [12]
+   sex    genotype         timepoint     n
+   <chr>  <chr>            <chr>     <int>
+ 1 female 5XFAD_carrier    12 mo         6
+ 2 female 5XFAD_carrier    4 mo          6
+ 3 female 5XFAD_carrier    6 mo          6
+ 4 female 5XFAD_noncarrier 12 mo         6
+ 5 female 5XFAD_noncarrier 4 mo          6
+ 6 female 5XFAD_noncarrier 6 mo          6
+ 7 male   5XFAD_carrier    12 mo         6
+ 8 male   5XFAD_carrier    4 mo          6
+ 9 male   5XFAD_carrier    6 mo          6
+10 male   5XFAD_noncarrier 12 mo         6
+11 male   5XFAD_noncarrier 4 mo          6
+12 male   5XFAD_noncarrier 6 mo          6
 ```
 
 How many rows and columns are there in counts?
@@ -191,10 +218,6 @@ counts <- counts %>%
   as.data.frame()
 ```
 
-``` error
-Error in counts %>% column_to_rownames(., var = "gene_id") %>% as.data.frame(): could not find function "%>%"
-```
-
 let’s confirm if change is done correctly
 
 ``` r
@@ -202,60 +225,72 @@ head(counts, n=5)
 ```
 
 ``` output
-             gene_id 32043rh 32044rh 32046rh 32047rh 32048rh 32049rh 32050rh
-1    ENSG00000080815   22554       0       0       0   16700       0       0
-2    ENSG00000142192  344489       4       0       1  260935       6       8
-3 ENSMUSG00000000001    5061    3483    3941    3088    2756    3067    2711
-4 ENSMUSG00000000003       0       0       0       0       0       0       0
-5 ENSMUSG00000000028     208     162     138     127      95     154     165
-  32052rh 32053rh 32057rh 32059rh 32061rh 32062rh 32065rh 32067rh 32068rh
-1   19748   14023       0   17062       0   15986      10       0   18584
-2  337456  206851       1  264748       0  252248     172       4  300398
-3    3334    3841    4068    3306    4076    3732    3940    4238    3257
-4       0       0       0       0       0       0       0       0       0
-5     124     103     164     116     108     134     204     239     148
-  32070rh 32073rh 32074rh 32075rh 32078rh 32081rh 32088rh 32640rh 46105rh
-1       1       0       0   22783   17029   16626   15573   12721       4
-2       4       2       9  342655  280968  258597  243373  188818      19
-3    3351    3449    4654    4844    3132    3334    3639    3355    4191
-4       0       0       0       0       0       0       0       0       0
-5     159     167     157     211     162     149     160     103     158
-  46106rh 46107rh 46108rh 46109rh 46110rh 46111rh 46112rh 46113rh 46115rh
-1       0       0       0       0       0   17931       0   19087       0
-2       0       0       1       5       1  293409       8  273704       1
-3    3058    4265    3248    3638    3747    3971    3192    3805    3753
-4       0       0       0       0       0       0       0       0       0
-5     167     199     113     168     175     203     158     108     110
-  46121rh 46131rh 46132rh 46134rh 46138rh 46141rh 46142rh 46862rh 46863rh
-1       0       0   12703   18833       0   18702   17666       0   14834
-2       0       1  187975  285048       0  284499  250600       0  218494
-3    4134    3059    3116    3853    3682    2844    3466    3442    3300
-4       0       0       0       0       0       0       0       0       0
-5     179     137     145     183     171     138      88     154     157
-  46865rh 46866rh 46867rh 46868rh 46871rh 46872rh 46873rh 46874rh 46875rh
-1   10546   10830   10316   10638   15248       0       0   11608   11561
-2  169516  152769  151732  190150  229063       6       1  165941  171303
-3    3242    3872    3656    3739    3473    3154    5510    3657    4121
-4       0       0       0       0       0       0       0       0       0
-5     131     152     152     155     140      80     240     148     112
-  46876rh 46877rh 46878rh 46879rh 46881rh 46882rh 46883rh 46884rh 46885rh
-1       0       0   12683   15613       0   14084   20753       0       0
-2       0       2  183058  216122       0  199448  306081       0       5
-3    3422    3829    3996    4324    2592    2606    4600    2913    3614
-4       0       0       0       0       0       0       0       0       0
-5     147     166     169     215     115     101     174     127     151
-  46886rh 46887rh 46888rh 46889rh 46890rh 46891rh 46892rh 46893rh 46895rh
-1   16639   16072       0   16680   13367       0   25119      92       0
-2  242543  258061       0  235530  196721       0  371037    1116       0
-3    3294    3719    3899    4173    4008    3037    5967    3459    4262
-4       0       0       0       0       0       0       0       0       0
-5     139     128     210     127     156     116     260     161     189
-  46896rh 46897rh
-1   15934       0
-2  235343       6
-3    3923    3486
-4       0       0
-5     179     117
+                   32043rh 32044rh 32046rh 32047rh 32048rh 32049rh 32050rh
+ENSG00000080815      22554       0       0       0   16700       0       0
+ENSG00000142192     344489       4       0       1  260935       6       8
+ENSMUSG00000000001    5061    3483    3941    3088    2756    3067    2711
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     208     162     138     127      95     154     165
+                   32052rh 32053rh 32057rh 32059rh 32061rh 32062rh 32065rh
+ENSG00000080815      19748   14023       0   17062       0   15986      10
+ENSG00000142192     337456  206851       1  264748       0  252248     172
+ENSMUSG00000000001    3334    3841    4068    3306    4076    3732    3940
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     124     103     164     116     108     134     204
+                   32067rh 32068rh 32070rh 32073rh 32074rh 32075rh 32078rh
+ENSG00000080815          0   18584       1       0       0   22783   17029
+ENSG00000142192          4  300398       4       2       9  342655  280968
+ENSMUSG00000000001    4238    3257    3351    3449    4654    4844    3132
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     239     148     159     167     157     211     162
+                   32081rh 32088rh 32640rh 46105rh 46106rh 46107rh 46108rh
+ENSG00000080815      16626   15573   12721       4       0       0       0
+ENSG00000142192     258597  243373  188818      19       0       0       1
+ENSMUSG00000000001    3334    3639    3355    4191    3058    4265    3248
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     149     160     103     158     167     199     113
+                   46109rh 46110rh 46111rh 46112rh 46113rh 46115rh 46121rh
+ENSG00000080815          0       0   17931       0   19087       0       0
+ENSG00000142192          5       1  293409       8  273704       1       0
+ENSMUSG00000000001    3638    3747    3971    3192    3805    3753    4134
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     168     175     203     158     108     110     179
+                   46131rh 46132rh 46134rh 46138rh 46141rh 46142rh 46862rh
+ENSG00000080815          0   12703   18833       0   18702   17666       0
+ENSG00000142192          1  187975  285048       0  284499  250600       0
+ENSMUSG00000000001    3059    3116    3853    3682    2844    3466    3442
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     137     145     183     171     138      88     154
+                   46863rh 46865rh 46866rh 46867rh 46868rh 46871rh 46872rh
+ENSG00000080815      14834   10546   10830   10316   10638   15248       0
+ENSG00000142192     218494  169516  152769  151732  190150  229063       6
+ENSMUSG00000000001    3300    3242    3872    3656    3739    3473    3154
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     157     131     152     152     155     140      80
+                   46873rh 46874rh 46875rh 46876rh 46877rh 46878rh 46879rh
+ENSG00000080815          0   11608   11561       0       0   12683   15613
+ENSG00000142192          1  165941  171303       0       2  183058  216122
+ENSMUSG00000000001    5510    3657    4121    3422    3829    3996    4324
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     240     148     112     147     166     169     215
+                   46881rh 46882rh 46883rh 46884rh 46885rh 46886rh 46887rh
+ENSG00000080815          0   14084   20753       0       0   16639   16072
+ENSG00000142192          0  199448  306081       0       5  242543  258061
+ENSMUSG00000000001    2592    2606    4600    2913    3614    3294    3719
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     115     101     174     127     151     139     128
+                   46888rh 46889rh 46890rh 46891rh 46892rh 46893rh 46895rh
+ENSG00000080815          0   16680   13367       0   25119      92       0
+ENSG00000142192          0  235530  196721       0  371037    1116       0
+ENSMUSG00000000001    3899    4173    4008    3037    5967    3459    4262
+ENSMUSG00000000003       0       0       0       0       0       0       0
+ENSMUSG00000000028     210     127     156     116     260     161     189
+                   46896rh 46897rh
+ENSG00000080815      15934       0
+ENSG00000142192     235343       6
+ENSMUSG00000000001    3923    3486
+ENSMUSG00000000003       0       0
+ENSMUSG00000000028     179     117
 ```
 
 As you can see from count table there are some genes that start with
@@ -269,8 +304,10 @@ counts[,1:6] %>%
   filter(!str_detect(rownames(.), "MUS"))
 ```
 
-``` error
-Error in counts[, 1:6] %>% filter(!str_detect(rownames(.), "MUS")): could not find function "%>%"
+``` output
+                32043rh 32044rh 32046rh 32047rh 32048rh 32049rh
+ENSG00000080815   22554       0       0       0   16700       0
+ENSG00000142192  344489       4       0       1  260935       6
 ```
 
 Ok, so we see there are two human genes in out count matrix. Why? What
@@ -295,18 +332,25 @@ count_tpose <- counts  %>%
                 filter(gene_id %in% c("ENSG00000080815","ENSMUSG00000019969","ENSG00000142192","ENSMUSG00000022892")) %>% 
                 pivot_longer(.,cols = -"gene_id",names_to = "specimenID",values_to="counts") %>% as.data.frame() %>%
                 left_join(covars, by="specimenID") %>% as.data.frame()
-```
 
-``` error
-Error in counts %>% rownames_to_column(., var = "gene_id") %>% filter(gene_id %in% : could not find function "%>%"
-```
-
-``` r
 head(count_tpose) 
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'count_tpose' not found
+``` output
+          gene_id specimenID counts individualID    sex         genotype
+1 ENSG00000080815    32043rh  22554        32043 female    5XFAD_carrier
+2 ENSG00000080815    32044rh      0        32044   male 5XFAD_noncarrier
+3 ENSG00000080815    32046rh      0        32046   male 5XFAD_noncarrier
+4 ENSG00000080815    32047rh      0        32047   male 5XFAD_noncarrier
+5 ENSG00000080815    32048rh  16700        32048 female    5XFAD_carrier
+6 ENSG00000080815    32049rh      0        32049 female 5XFAD_noncarrier
+  timepoint
+1     12 mo
+2     12 mo
+3     12 mo
+4     12 mo
+5     12 mo
+6     12 mo
 ```
 
 Rename the APP and PSEN1 genes to specify whether mouse or human.
@@ -315,43 +359,12 @@ Rename the APP and PSEN1 genes to specify whether mouse or human.
 ``` r
 #make the age column a factor and re-order the levels
 count_tpose$timepoint <- factor(count_tpose$timepoint,levels=c("4 mo","6 mo","12 mo"))
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'count_tpose' not found
-```
-
-``` r
 # rename the gene id to gene symbol
 count_tpose$gene_id[count_tpose$gene_id %in% "ENSG00000142192"] <- "Human APP"
-```
-
-``` error
-Error: object 'count_tpose' not found
-```
-
-``` r
 count_tpose$gene_id[count_tpose$gene_id %in% "ENSG00000080815"] <- "Human PSEN1"
-```
-
-``` error
-Error: object 'count_tpose' not found
-```
-
-``` r
 count_tpose$gene_id[count_tpose$gene_id %in% "ENSMUSG00000022892"] <- "Mouse App"
-```
-
-``` error
-Error: object 'count_tpose' not found
-```
-
-``` r
 count_tpose$gene_id[count_tpose$gene_id %in% "ENSMUSG00000019969"] <- "Mouse Psen1"
-```
-
-``` error
-Error: object 'count_tpose' not found
 ```
 
 Visualize orthologous genes.
@@ -366,9 +379,7 @@ count_tpose %>%
   facet_wrap(~sex+gene_id) +theme_bw()
 ```
 
-``` error
-Error in count_tpose %>% ggplot(aes(x = timepoint, y = counts, color = genotype)): could not find function "%>%"
-```
+<img src="fig/differential-expression-analysis-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" />
 
 You will notice expression of Human APP is higher in 5XFAD carriers but
 lower in non-carriers. However mouse App expressed in both 5XFAD carrier
@@ -382,24 +393,10 @@ control mice.
 ``` r
 #merge mouse and human APP gene raw count
 counts[rownames(counts) %in% "ENSMUSG00000022892",] <- counts[rownames(counts) %in% "ENSMUSG00000022892",] + counts[rownames(counts) %in% "ENSG00000142192",]
-```
-
-``` error
-Error in FUN(left, right): non-numeric argument to binary operator
-```
-
-``` r
 counts <- counts[!rownames(counts) %in% c("ENSG00000142192"),]
 
 #merge mouse and human PS1 gene raw count
 counts[rownames(counts) %in% "ENSMUSG00000019969",] <- counts[rownames(counts) %in% "ENSMUSG00000019969",] + counts[rownames(counts) %in% "ENSG00000080815",]
-```
-
-``` error
-Error in FUN(left, right): non-numeric argument to binary operator
-```
-
-``` r
 counts <- counts[!rownames(counts) %in% c("ENSG00000080815"),]
 ```
 
@@ -410,8 +407,9 @@ counts[,1:6] %>%
   filter(!str_detect(rownames(.), "MUS"))
 ```
 
-``` error
-Error in counts[, 1:6] %>% filter(!str_detect(rownames(.), "MUS")): could not find function "%>%"
+``` output
+[1] 32043rh 32044rh 32046rh 32047rh 32048rh 32049rh
+<0 rows> (or 0-length row.names)
 ```
 
 What proportion of genes have zero counts in all samples?
@@ -419,18 +417,11 @@ What proportion of genes have zero counts in all samples?
 ``` r
 gene_sums <- data.frame(gene_id = rownames(counts),
                         sums    = Matrix::rowSums(counts))
-```
-
-``` error
-Error in base::rowSums(x, na.rm = na.rm, dims = dims, ...): 'x' must be numeric
-```
-
-``` r
 sum(gene_sums$sums == 0)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'gene_sums' not found
+``` output
+[1] 9691
 ```
 
 We can see that 9691 (17%) genes have no reads at all associated with
@@ -969,10 +960,21 @@ tzcode source: system (glibc)
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+ [5] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+ [9] ggplot2_3.5.1   tidyverse_2.0.0
+
 loaded via a namespace (and not attached):
- [1] compiler_4.4.1  Matrix_1.6-5    tools_4.4.1     yaml_2.3.9     
- [5] grid_4.4.1      knitr_1.48      xfun_0.46       renv_1.0.7     
- [9] lattice_0.22-5  evaluate_0.24.0
+ [1] Matrix_1.6-5     gtable_0.3.5     compiler_4.4.1   renv_1.0.7      
+ [5] highr_0.11       tidyselect_1.2.1 scales_1.3.0     yaml_2.3.9      
+ [9] lattice_0.22-5   R6_2.5.1         labeling_0.4.3   generics_0.1.3  
+[13] knitr_1.48       munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0      
+[17] rlang_1.1.4      utf8_1.2.4       stringi_1.8.4    xfun_0.46       
+[21] timechange_0.3.0 cli_3.6.3        withr_3.0.0      magrittr_2.0.3  
+[25] grid_4.4.1       hms_1.1.3        lifecycle_1.0.4  vctrs_0.6.5     
+[29] evaluate_0.24.0  glue_1.7.0       farver_2.1.2     fansi_1.0.6     
+[33] colorspace_2.1-0 tools_4.4.1      pkgconfig_2.0.3 
 ```
 
 

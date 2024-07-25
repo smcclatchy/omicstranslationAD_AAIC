@@ -36,6 +36,18 @@ The following objects are masked from 'package:base':
 
     intersect, setdiff, setequal, union
 ```
+
+``` output
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ readr     2.1.5
+✔ ggplot2   3.5.1     ✔ stringr   1.5.1
+✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ purrr     1.0.2     ✔ tidyr     1.3.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
 ## Working with AD Portal metadata 
 
 **Metadata basics** 
@@ -60,37 +72,15 @@ individual, biospecimen, and RNAseq assay metadata files.
 ``` r
 # counts matrix
 counts <- read_tsv("data/htseqcounts_5XFAD.txt", show_col_types = FALSE)
-```
 
-``` error
-Error in read_tsv("data/htseqcounts_5XFAD.txt", show_col_types = FALSE): could not find function "read_tsv"
-```
-
-``` r
 # individual metadata
 ind_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE)
-```
 
-``` error
-Error in read_csv("data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE): could not find function "read_csv"
-```
-
-``` r
 # biospecimen metadata
 bio_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE)
-```
 
-``` error
-Error in read_csv("data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE): could not find function "read_csv"
-```
-
-``` r
 #assay metadata
 rna_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", show_col_types = FALSE)
-```
-
-``` error
-Error in read_csv("data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", : could not find function "read_csv"
 ```
 
 Let’s examine the data and metadata files a bit before we begin our
@@ -103,8 +93,27 @@ analyses.
 counts
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'counts' not found
+``` output
+# A tibble: 55,489 × 73
+   gene_id `32043rh` `32044rh` `32046rh` `32047rh` `32048rh` `32049rh` `32050rh`
+   <chr>       <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>     <dbl>
+ 1 ENSG00…     22554         0         0         0     16700         0         0
+ 2 ENSG00…    344489         4         0         1    260935         6         8
+ 3 ENSMUS…      5061      3483      3941      3088      2756      3067      2711
+ 4 ENSMUS…         0         0         0         0         0         0         0
+ 5 ENSMUS…       208       162       138       127        95       154       165
+ 6 ENSMUS…        44        17        14        28        23        24        14
+ 7 ENSMUS…       143        88       121       117       115       109        75
+ 8 ENSMUS…        22         6        10        11        11        19        24
+ 9 ENSMUS…      7165      5013      5581      4011      4104      5254      4345
+10 ENSMUS…      3728      2316      2238      1965      1822      1999      1809
+# ℹ 55,479 more rows
+# ℹ 65 more variables: `32052rh` <dbl>, `32053rh` <dbl>, `32057rh` <dbl>,
+#   `32059rh` <dbl>, `32061rh` <dbl>, `32062rh` <dbl>, `32065rh` <dbl>,
+#   `32067rh` <dbl>, `32068rh` <dbl>, `32070rh` <dbl>, `32073rh` <dbl>,
+#   `32074rh` <dbl>, `32075rh` <dbl>, `32078rh` <dbl>, `32081rh` <dbl>,
+#   `32088rh` <dbl>, `32640rh` <dbl>, `46105rh` <dbl>, `46106rh` <dbl>,
+#   `46107rh` <dbl>, `46108rh` <dbl>, `46109rh` <dbl>, `46110rh` <dbl>, …
 ```
 
 The data file has a column of ENSEMBL gene ids and then a bunch of
@@ -117,8 +126,23 @@ metadata file, so let’s check.
 rna_meta
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
+``` output
+# A tibble: 72 × 12
+   specimenID platform   RIN   rnaBatch libraryBatch sequencingBatch libraryPrep
+   <chr>      <chr>      <lgl>    <dbl>        <dbl>           <dbl> <chr>      
+ 1 32043rh    IlluminaN… NA           1            1               1 polyAselec…
+ 2 32044rh    IlluminaN… NA           1            1               1 polyAselec…
+ 3 32046rh    IlluminaN… NA           1            1               1 polyAselec…
+ 4 32047rh    IlluminaN… NA           1            1               1 polyAselec…
+ 5 32049rh    IlluminaN… NA           1            1               1 polyAselec…
+ 6 32057rh    IlluminaN… NA           1            1               1 polyAselec…
+ 7 32061rh    IlluminaN… NA           1            1               1 polyAselec…
+ 8 32065rh    IlluminaN… NA           1            1               1 polyAselec…
+ 9 32067rh    IlluminaN… NA           1            1               1 polyAselec…
+10 32070rh    IlluminaN… NA           1            1               1 polyAselec…
+# ℹ 62 more rows
+# ℹ 5 more variables: libraryPreparationMethod <lgl>, isStranded <lgl>,
+#   readStrandOrigin <lgl>, runType <chr>, readLength <dbl>
 ```
 
 
@@ -127,8 +151,8 @@ Error in eval(expr, envir, enclos): object 'rna_meta' not found
 all(colnames(counts[-1]) %in% rna_meta$specimenID)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'counts' not found
+``` output
+[1] TRUE
 ```
 
 **Assay metadata** 
@@ -142,8 +166,8 @@ unique sample. We can use some tools from dplyr to explore the metadata.
 n_distinct(rna_meta$specimenID)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
+``` output
+[1] 72
 ```
 
 
@@ -152,8 +176,11 @@ Error in eval(expr, envir, enclos): object 'rna_meta' not found
 distinct(rna_meta, platform)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
+``` output
+# A tibble: 1 × 1
+  platform           
+  <chr>              
+1 IlluminaNovaseq6000
 ```
 
 
@@ -162,8 +189,11 @@ Error in eval(expr, envir, enclos): object 'rna_meta' not found
 distinct(rna_meta, sequencingBatch) 
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
+``` output
+# A tibble: 1 × 1
+  sequencingBatch
+            <dbl>
+1               1
 ```
 
 **Biospecimen metadata** 
@@ -177,8 +207,8 @@ it was prepared, etc. Each specimenID is mapped to an individualID.
 all(rna_meta$specimenID %in% bio_meta$specimenID)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
+``` output
+[1] TRUE
 ```
 
 
@@ -187,8 +217,8 @@ Error in eval(expr, envir, enclos): object 'rna_meta' not found
 all(bio_meta$specimenID %in% rna_meta$specimenID)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'bio_meta' not found
+``` output
+[1] FALSE
 ```
 
 **Individual metadata** 
@@ -205,8 +235,8 @@ model genotypes, stock numbers, diet, and more.
 all(bio_meta$individualID %in% ind_meta$individualID)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'bio_meta' not found
+``` output
+[1] TRUE
 ```
 
 
@@ -215,8 +245,12 @@ Error in eval(expr, envir, enclos): object 'bio_meta' not found
 distinct(ind_meta, genotype)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'ind_meta' not found
+``` output
+# A tibble: 2 × 1
+  genotype        
+  <chr>           
+1 5XFAD_carrier   
+2 5XFAD_noncarrier
 ```
 
 **Joining metadata** 
@@ -238,18 +272,31 @@ for more info on piping in R.
 joined_meta <- rna_meta %>% #start with the rnaseq assay metadata
   left_join(bio_meta, by = "specimenID") %>%  #join rows from biospecimen that match specimenID 
   left_join(ind_meta, by = "individualID") # join rows from individual that match individualID
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'rna_meta' not found
-```
-
-``` r
 joined_meta
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'joined_meta' not found
+``` output
+# A tibble: 72 × 53
+   specimenID platform   RIN   rnaBatch libraryBatch sequencingBatch libraryPrep
+   <chr>      <chr>      <lgl>    <dbl>        <dbl>           <dbl> <chr>      
+ 1 32043rh    IlluminaN… NA           1            1               1 polyAselec…
+ 2 32044rh    IlluminaN… NA           1            1               1 polyAselec…
+ 3 32046rh    IlluminaN… NA           1            1               1 polyAselec…
+ 4 32047rh    IlluminaN… NA           1            1               1 polyAselec…
+ 5 32049rh    IlluminaN… NA           1            1               1 polyAselec…
+ 6 32057rh    IlluminaN… NA           1            1               1 polyAselec…
+ 7 32061rh    IlluminaN… NA           1            1               1 polyAselec…
+ 8 32065rh    IlluminaN… NA           1            1               1 polyAselec…
+ 9 32067rh    IlluminaN… NA           1            1               1 polyAselec…
+10 32070rh    IlluminaN… NA           1            1               1 polyAselec…
+# ℹ 62 more rows
+# ℹ 46 more variables: libraryPreparationMethod <lgl>, isStranded <lgl>,
+#   readStrandOrigin <lgl>, runType <chr>, readLength <dbl>,
+#   individualID <dbl>, specimenIdSource <chr>, organ <chr>, tissue <chr>,
+#   BrodmannArea <lgl>, sampleStatus <chr>, tissueWeight <lgl>,
+#   tissueVolume <lgl>, nucleicAcidSource <lgl>, cellType <lgl>,
+#   fastingState <lgl>, isPostMortem <lgl>, samplingAge <lgl>, …
 ```
 
 We now have a very wide dataframe that contains all the available
@@ -260,20 +307,7 @@ individuals and specimens as needed based on your analysis criteria!
 
 ``` r
 library(lubridate)
-```
 
-``` output
-
-Attaching package: 'lubridate'
-```
-
-``` output
-The following objects are masked from 'package:base':
-
-    date, intersect, setdiff, union
-```
-
-``` r
 # convert columns of strings to month-date-year format
 joined_meta_time <- joined_meta %>% 
   mutate(dateBirth = mdy(dateBirth), dateDeath = mdy(dateDeath)) %>% 
@@ -283,45 +317,28 @@ joined_meta_time <- joined_meta %>%
   mutate(timepoint = case_when(timepoint > 10 ~ "12 mo",
                                timepoint < 10 & timepoint > 5 ~ "6 mo",
                                timepoint < 5 ~ "4 mo"))
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'joined_meta' not found
-```
-
-``` r
 covars_5XFAD <- joined_meta_time %>%
   dplyr::select(individualID, specimenID, sex, genotype, timepoint) %>% distinct() %>% as.data.frame()
-```
-
-``` error
-Error in eval(expr, envir, enclos): object 'joined_meta_time' not found
-```
-
-``` r
 rownames(covars_5XFAD) <- covars_5XFAD$specimenID
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
-```
-
-``` r
 head(covars_5XFAD)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
+``` output
+        individualID specimenID    sex         genotype timepoint
+32043rh        32043    32043rh female    5XFAD_carrier     12 mo
+32044rh        32044    32044rh   male 5XFAD_noncarrier     12 mo
+32046rh        32046    32046rh   male 5XFAD_noncarrier     12 mo
+32047rh        32047    32047rh   male 5XFAD_noncarrier     12 mo
+32049rh        32049    32049rh female 5XFAD_noncarrier     12 mo
+32057rh        32057    32057rh female 5XFAD_noncarrier     12 mo
 ```
 
 We will save joined_meta for the next lesson.
 
 ``` r
 saveRDS(covars_5XFAD, file = "data/covars_5XFAD.rds")
-```
-
-``` error
-Error in eval(expr, envir, enclos): object 'covars_5XFAD' not found
 ```
 
 ## Single Specimen files
@@ -405,9 +422,38 @@ counts %>%
   left_join(joined_meta, by = "specimenID")
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'counts' not found
+``` warning
+Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if
+`.name_repair` is omitted as of tibble 2.0.0.
+ℹ Using compatibility `.name_repair`.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.
 ```
+
+``` output
+# A tibble: 73 × 58
+   specimenID V1    V2    V3    V4    V5    platform RIN   rnaBatch libraryBatch
+   <chr>      <chr> <chr> <chr> <chr> <chr> <chr>    <lgl>    <dbl>        <dbl>
+ 1 gene_id    "ENS… "ENS… "ENS… "ENS… "ENS… <NA>     NA          NA           NA
+ 2 32043rh    " 22… "344… "  5… "   … "   … Illumin… NA           1            1
+ 3 32044rh    "   … "   … "348… "   … " 16… Illumin… NA           1            1
+ 4 32046rh    "   … "   … "394… "   … " 13… Illumin… NA           1            1
+ 5 32047rh    "   … "   … "308… "   … " 12… Illumin… NA           1            1
+ 6 32048rh    " 16… "260… "  2… "   … "   … Illumin… NA           1            1
+ 7 32049rh    "   … "   … "306… "   … " 15… Illumin… NA           1            1
+ 8 32050rh    "   … "   … "271… "   … " 16… Illumin… NA           1            1
+ 9 32052rh    " 19… "337… "  3… "   … "   … Illumin… NA           1            1
+10 32053rh    " 14… "206… "  3… "   … "   … Illumin… NA           1            1
+# ℹ 63 more rows
+# ℹ 48 more variables: sequencingBatch <dbl>, libraryPrep <chr>,
+#   libraryPreparationMethod <lgl>, isStranded <lgl>, readStrandOrigin <lgl>,
+#   runType <chr>, readLength <dbl>, individualID <dbl>,
+#   specimenIdSource <chr>, organ <chr>, tissue <chr>, BrodmannArea <lgl>,
+#   sampleStatus <chr>, tissueWeight <lgl>, tissueVolume <lgl>,
+#   nucleicAcidSource <lgl>, cellType <lgl>, fastingState <lgl>, …
+```
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use your Synapse login credentials to access the Portal.
@@ -443,13 +489,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] lubridate_1.9.3 dplyr_1.1.4    
+ [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   purrr_1.0.2    
+ [5] readr_2.1.5     tidyr_1.3.1     tibble_3.2.1    ggplot2_3.5.1  
+ [9] tidyverse_2.0.0 dplyr_1.1.4    
 
 loaded via a namespace (and not attached):
- [1] utf8_1.2.4       R6_2.5.1         tidyselect_1.2.1 xfun_0.46       
- [5] magrittr_2.0.3   glue_1.7.0       tibble_3.2.1     knitr_1.48      
- [9] pkgconfig_2.0.3  timechange_0.3.0 generics_0.1.3   lifecycle_1.0.4 
-[13] cli_3.6.3        fansi_1.0.6      vctrs_0.6.5      renv_1.0.7      
-[17] compiler_4.4.1   tools_4.4.1      evaluate_0.24.0  pillar_1.9.0    
-[21] yaml_2.3.9       rlang_1.1.4     
+ [1] bit_4.0.5        gtable_0.3.5     compiler_4.4.1   renv_1.0.7      
+ [5] crayon_1.5.3     tidyselect_1.2.1 parallel_4.4.1   scales_1.3.0    
+ [9] yaml_2.3.9       R6_2.5.1         generics_0.1.3   knitr_1.48      
+[13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
+[17] utf8_1.2.4       stringi_1.8.4    xfun_0.46        bit64_4.0.5     
+[21] timechange_0.3.0 cli_3.6.3        withr_3.0.0      magrittr_2.0.3  
+[25] grid_4.4.1       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
+[29] vctrs_0.6.5      evaluate_0.24.0  glue_1.7.0       fansi_1.0.6     
+[33] colorspace_2.1-0 tools_4.4.1      pkgconfig_2.0.3 
 ```

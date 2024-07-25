@@ -1310,18 +1310,8 @@ mm.gsea <- bind_rows(
     mutate(age = str_remove_all(age, ' mo') %>% as.double()),
   read_tsv('data/LOAD1_gsea_results.tsv', col_types = cols())
 )
-```
 
-``` error
-Error in bind_rows(read_tsv("data/5xFAD_gsea_results.tsv", col_types = cols()) %>% : could not find function "bind_rows"
-```
-
-``` r
 hs.gsea <- read_tsv('data/Hsap_gsea_results.tsv', col_types = cols())
-```
-
-``` error
-Error in read_tsv("data/Hsap_gsea_results.tsv", col_types = cols()): could not find function "read_tsv"
 ```
 
 The cohorts and tissues available are:
@@ -1330,8 +1320,16 @@ The cohorts and tissues available are:
 hs.gsea %>% select(Study, Tissue) %>% distinct()
 ```
 
-``` error
-Error in hs.gsea %>% select(Study, Tissue) %>% distinct(): could not find function "%>%"
+``` output
+# A tibble: 6 × 2
+  Study  Tissue
+  <chr>  <chr> 
+1 MAYO   CBE   
+2 MAYO   TCX   
+3 MSSM   STG   
+4 MSSM   PHG   
+5 MSSM   IFG   
+6 ROSMAP DLPFC 
 ```
 
 We can focus on one tissue per cohort, let's look at TCX for Mayo, PHG for Mt 
@@ -1390,18 +1388,21 @@ comb_5x = bind_rows(
   ) %>% 
   unnest(cols = c(hs,mm)) %>% 
   mutate(across(c(hs,mm), ~ if_else(is.na(.x), 0, .x)))
-```
 
-``` error
-Error in bind_rows(hs.gsea %>% filter(Study == "MAYO", Tissue == "TCX") %>% : could not find function "%>%"
-```
 
-``` r
 head(comb_5x)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'comb_5x' not found
+``` output
+# A tibble: 6 × 4
+  ID         Description                                 hs    mm
+  <chr>      <chr>                                    <dbl> <dbl>
+1 GO:0001568 blood vessel development                  3.20     0
+2 GO:0048514 blood vessel morphogenesis                3.18     0
+3 GO:0001944 vasculature development                   3.17     0
+4 GO:0001525 angiogenesis                              3.16     0
+5 GO:0062023 collagen-containing extracellular matrix  3.15     0
+6 GO:0042060 wound healing                             3.06     0
 ```
 
 Great! Now let's annotate the biodomains and plot it up:
@@ -1481,7 +1482,19 @@ tzcode source: system (glibc)
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+ [1] data.table_1.15.4 lubridate_1.9.3   forcats_1.0.0     stringr_1.5.1    
+ [5] dplyr_1.1.4       purrr_1.0.2       readr_2.1.5       tidyr_1.3.1      
+ [9] tibble_3.2.1      tidyverse_2.0.0   ggplot2_3.5.1    
+
 loaded via a namespace (and not attached):
-[1] compiler_4.4.1  tools_4.4.1     yaml_2.3.9      knitr_1.48     
-[5] xfun_0.46       renv_1.0.7      evaluate_0.24.0
+ [1] bit_4.0.5        gtable_0.3.5     crayon_1.5.3     compiler_4.4.1  
+ [5] renv_1.0.7       tidyselect_1.2.1 parallel_4.4.1   scales_1.3.0    
+ [9] yaml_2.3.9       R6_2.5.1         generics_0.1.3   knitr_1.48      
+[13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
+[17] utf8_1.2.4       stringi_1.8.4    xfun_0.46        bit64_4.0.5     
+[21] timechange_0.3.0 cli_3.6.3        withr_3.0.0      magrittr_2.0.3  
+[25] grid_4.4.1       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
+[29] vctrs_0.6.5      evaluate_0.24.0  glue_1.7.0       fansi_1.0.6     
+[33] colorspace_2.1-0 tools_4.4.1      pkgconfig_2.0.3 
 ```
