@@ -21,6 +21,7 @@ exercises: 10
 
 ```{r, echo=FALSE}
 library(dplyr)
+library(tidyverse)
 ```
 ## Working with AD Portal metadata 
 
@@ -256,6 +257,7 @@ counts %>%
   as_tibble(rownames = "specimenID") %>% 
   left_join(joined_meta, by = "specimenID")
 ```
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use your Synapse login credentials to access the Portal.
