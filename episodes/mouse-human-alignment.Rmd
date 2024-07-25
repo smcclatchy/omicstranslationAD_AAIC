@@ -955,13 +955,13 @@ length(gene.list.up)
 length(gene.list.dn)
 ```
 
-There are a total of `r length(gene.list.up)` significantly up-regulated genes 
-and `r length(gene.list.dn)` significantly down-regulated genes in this cohort. 
+There are a total of `r #length(gene.list.up)` significantly up-regulated genes 
+and `r #length(gene.list.dn)` significantly down-regulated genes in this cohort. 
 Now test for over representation of GO terms among the DEGs. First, we need to 
 identify the universe of all possible genes which includes the genes that were 
 both measured by the experiment and contained within the annotation set.
 
-```{r}
+```{r, eval=FALSE}
 univ <- as.data.frame(org.Mm.egGO) %>% 
   pull(gene_id) %>% 
   unique() %>% 
@@ -972,7 +972,7 @@ univ <- as.data.frame(org.Mm.egGO) %>%
 
 Now let's test for enriched GO terms (this can take 3-4 minutes)
 
-```{r}
+```{r, eval=FALSE}
 enr.up <- enrichGO(gene.list.up, 
                    ont = 'all', 
                    OrgDb = org.Mm.eg.db, 
@@ -988,7 +988,7 @@ enr.dn <- enrichGO(gene.list.dn,
 ```
 
 How many significant terms are identified:  
-```{r}
+```{r, eval=FALSE}
 enr.up@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 enr.dn@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 ```
@@ -1007,14 +1007,14 @@ enr.dn@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length(
 {: .challenge}
 
 Plot the top 10 significant terms:  
-```{r significant_terms, fig.width=12, fig.height=5, fig.show='hide'}
+```{r significant_terms, fig.width=12, fig.height=5, fig.show='hide', eval=FALSE}
 cowplot::plot_grid(
   dotplot(enr.dn, showCategory = 10) + ggtitle('down'),
   dotplot(enr.up, showCategory = 10) + ggtitle('up')
 )
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 png(file="../results/significantTerms.png", width=12, height=5, units="in", res = 1200)
 cowplot::plot_grid(
   dotplot(enr.dn, showCategory = 10) + ggtitle('down'),
@@ -1040,7 +1040,7 @@ Let's analyze those same data with the `clusterProfiler::gseGO()` function.
 First we'll specify the gene list and use the `log2FoldChange` value to rank the 
 genes in the list.  
 
-```{r}
+```{r, eval=FALSE}
 gene.list <- DE_5xFAD.df %>% 
   filter(sex == 'male', 
          age == '12 mo',
@@ -1053,13 +1053,13 @@ gene.list <- DE_5xFAD.df %>%
 
 Now we'll test for enrichment:  
 
-```{r warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE, eval=FALSE}
 enr <- gseGO(gene.list, ont = 'all', OrgDb = org.Mm.eg.db, keyType = 'SYMBOL')
 ```
 
 How many significant terms are identified:  
 
-```{r}
+```{r, eval=FALSE}
 enr@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 ```
 
@@ -1078,11 +1078,11 @@ enr@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 
 Plot the term enrichments
 
-```{r term_enrichments, fig.width=12, fig.height=8, fig.show='hide'}
+```{r term_enrichments, fig.width=12, fig.height=8, fig.show='hide', eval=FALSE}
 ridgeplot(enr, core_enrichment = T, showCategory = 15)
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 png(file="../results/ridgePlot.png", width=12, height=8, units="in", res = 1200)
 ridgeplot(enr, core_enrichment = T, showCategory = 15)
 dev.off()
@@ -1158,7 +1158,7 @@ the biological domains is described in more detail in the published paper
 ### Download and explore the biological domain annotations
 
 First let's download the biodomain definition file from synapse.  
-```{r}
+```{r, eval=FALSE}
 #synLogin()
 
 # biodomain definitions
@@ -1167,7 +1167,7 @@ dom.lab <- read_csv(synGet('syn26856828')$path)
 ```
 
 What is in the file?
-```{r}
+```{r, eval=FALSE}
 head(biodom)
 ```
 
@@ -1181,7 +1181,7 @@ annotations are drawn directly from the Gene Ontology via the provided API, (2)
 
 We can see how many GO terms are annotated to each biodomain: 
 
-```{r}
+```{r, eval=FALSE}
 biodom %>% group_by(Biodomain) %>% summarise(n_term = length(unique(GO_ID))) %>% arrange(n_term) 
 ```
 
@@ -1191,7 +1191,7 @@ The biodomains range in size from `Tau Homeostasis` (10 terms) up to `Synapse`
 We can also investigate the individual genes annotated to each biodomain GO 
 term.
 
-```{r}
+```{r, eval=FALSE}
 biodom %>% filter(GOterm_Name == 'amyloid-beta formation') %>% pull(symbol) %>% unlist()
 ```
 
@@ -1206,7 +1206,7 @@ with the biological domain annotations and see if we can get more context about
 what is changing in that model. We'll focus on the GSEA results and start by 
 annotating the results with biodomain groupings.  
 
-```{r}
+```{r, eval=FALSE}
 enr.bd = enr@result %>% 
   left_join(., biodom %>% select(Biodomain, ID = GO_ID), by = 'ID') %>% 
   relocate(Biodomain)
@@ -1222,14 +1222,14 @@ a requirement that they be modifiable, and these terms may be added to the
 biodomain definintions in the future. Let's modify the `Biodomain` value for 
 terms that aren't annotated to a domain to 'none'.  
 
-```{r}
+```{r, eval=FALSE}
 enr.bd$Biodomain[is.na(enr.bd$Biodomain)] <- 'none'
 head(enr.bd[,1:4])
 ```
 
 How many terms are enriched from each domain?
 
-```{r}
+```{r, eval=FALSE}
 bd.tally = tibble(domain = c(unique(biodom$Biodomain), 'none')) %>% 
   rowwise() %>% 
   mutate(
@@ -1243,7 +1243,7 @@ Many enriched terms don't map to a domain (`r bd.tally %>% filter(domain == 'non
 
 We can plot the enrichment results, stratified by biodomain:  
 
-```{r biodom_plot, fig.width=9, fig.height=7, fig.show='hide'}
+```{r biodom_plot, fig.width=9, fig.height=7, fig.show='hide', eval=FALSE}
 enr.bd_plot <- full_join(enr.bd, dom.lab, by = c('Biodomain' = 'domain')) %>% 
   mutate(Biodomain = factor(Biodomain, levels = arrange(bd.tally, n_sig_term) %>% pull(domain))) %>% 
   arrange(Biodomain, p.adjust) 
@@ -1260,7 +1260,7 @@ ggplot(enr.bd_plot, aes(NES, Biodomain)) +
   scale_fill_identity()+scale_color_identity()
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 enr.bd_plot <- full_join(enr.bd, dom.lab, by = c('Biodomain' = 'domain')) %>% 
   mutate(Biodomain = factor(Biodomain, levels = arrange(bd.tally, n_sig_term) %>% pull(domain))) %>% 
   arrange(Biodomain, p.adjust) 
@@ -1330,12 +1330,12 @@ human data.
 
 ```{r, warning=FALSE, message=FALSE}
 mm.gsea <- bind_rows(
-  read_tsv('../data/5xFAD_gsea_results.tsv', col_types = cols()) %>%
+  read_tsv('data/5xFAD_gsea_results.tsv', col_types = cols()) %>%
     mutate(age = str_remove_all(age, ' mo') %>% as.double()),
-  read_tsv('../data/LOAD1_gsea_results.tsv', col_types = cols())
+  read_tsv('data/LOAD1_gsea_results.tsv', col_types = cols())
 )
 
-hs.gsea <- read_tsv('../data/Hsap_gsea_results.tsv', col_types = cols())
+hs.gsea <- read_tsv('data/Hsap_gsea_results.tsv', col_types = cols())
 ```
 
 The cohorts and tissues available are:
@@ -1346,7 +1346,7 @@ hs.gsea %>% select(Study, Tissue) %>% distinct()
 We can focus on one tissue per cohort, let's look at TCX for Mayo, PHG for Mt 
 Sinai, and DLPFC for ROSMAP. 
 
-```{r biodomain_one_tissue_per_cohort, warning=FALSE, message=FALSE}
+```{r biodomain_one_tissue_per_cohort, warning=FALSE, message=FALSE, eval=FALSE}
 enr.bd = hs.gsea %>% 
   filter(Tissue %in% c('TCX','PHG','DLPFC')) %>% 
   left_join(., biodom %>% select(Biodomain, ID = GO_ID), by = 'ID') %>% 
@@ -1404,7 +1404,7 @@ head(comb_5x)
 
 Great! Now let's annotate the biodomains and plot it up:
 
-```{r annotated_biodomains, fig.width=10, fig.height=6, warning=FALSE, message=FALSE}
+```{r annotated_biodomains, fig.width=10, fig.height=6, warning=FALSE, message=FALSE, eval=FALSE}
 enr.bd <- comb_5x %>% 
   left_join(., biodom %>% select(Biodomain, ID = GO_ID), by = 'ID') %>% 
   relocate(Biodomain) %>% 
