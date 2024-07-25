@@ -61,6 +61,8 @@ contact: 'team@carpentries.org' # FIXME
 episodes: 
 - introduction.md
 - exploring-data-in-synapse.Rmd
+- differential-expression-analysis.Rmd
+- mouse-human-alignment.Rmd
 
 # Information for Learners
 learners: 
