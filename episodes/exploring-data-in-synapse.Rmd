@@ -19,6 +19,9 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+```{r, echo=FALSE}
+library(dplyr)
+```
 ## Working with AD Portal metadata 
 
 **Metadata basics** 
@@ -38,25 +41,25 @@ download_table %>%
 
 We are only interested in RNAseq data, so we will only read in the
 individual, biospecimen, and RNAseq assay metadata files.
-```{r, eval=FALSE}
+```{r}
 # counts matrix
-counts <- read_tsv("../data/htseqcounts_5XFAD.txt", show_col_types = FALSE)
+counts <- read_tsv("data/htseqcounts_5XFAD.txt", show_col_types = FALSE)
 
 # individual metadata
-ind_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE)
+ind_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_individual_metadata.csv", show_col_types = FALSE)
 
 # biospecimen metadata
-bio_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE)
+bio_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_biospecimen_metadata.csv", show_col_types = FALSE)
 
 #assay metadata
-rna_meta <- read_csv("../data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", show_col_types = FALSE)
+rna_meta <- read_csv("data/Jax.IU.Pitt_5XFAD_assay_RNAseq_metadata.csv", show_col_types = FALSE)
 ```
 
 Let’s examine the data and metadata files a bit before we begin our
 analyses.
 
 **Counts data**
-```{r, eval=FALSE}
+```{r}
 # Calling a tibble object will print the first ten rows in a nice tidy output; doing the same for a base R dataframe will print the whole thing until it runs out of memory. If you want to inspect a large dataframe, use `head(df)`
 counts
 ```
@@ -65,12 +68,12 @@ The data file has a column of ENSEMBL gene ids and then a bunch of
 columns with count data, where the column headers correspond to the
 specimenIDs. These specimenIDs should all be in the RNAseq assay
 metadata file, so let’s check.
-```{r, eval=FALSE}
+```{r}
 # what does the RNAseq assay metadata look like?
 rna_meta
 ```
 
-```{r, eval=FALSE}
+```{r}
 # are all the column headers from the counts matrix (except the first "gene_id" column) in the assay metadata?
 all(colnames(counts[-1]) %in% rna_meta$specimenID)
 ```
@@ -80,17 +83,17 @@ all(colnames(counts[-1]) %in% rna_meta$specimenID)
 The assay metadata contains information about how data
 was generated on each sample in the assay. Each specimenID represents a
 unique sample. We can use some tools from dplyr to explore the metadata.
-```{r, eval=FALSE}
+```{r}
 # how many unique specimens were sequenced?
 n_distinct(rna_meta$specimenID)
 ```
 
-```{r, eval=FALSE}
+```{r}
 # were the samples all sequenced on the same platform?
 distinct(rna_meta, platform)
 ```
 
-```{r, eval=FALSE}
+```{r}
 # were there multiple sequencing batches reported?
 distinct(rna_meta, sequencingBatch) 
 ```
@@ -100,12 +103,12 @@ distinct(rna_meta, sequencingBatch)
 The biospecimen metadata contains specimen-level
 information, including organ and tissue the specimen was taken from, how
 it was prepared, etc. Each specimenID is mapped to an individualID.
-```{r, eval=FALSE}
+```{r}
 # all specimens from the RNAseq assay metadata file should be in the biospecimen file
 all(rna_meta$specimenID %in% bio_meta$specimenID)
 ```
 
-```{r, eval=FALSE}
+```{r}
 # but the biospecimen file also contains specimens from different assays
 all(bio_meta$specimenID %in% rna_meta$specimenID)
 ```
@@ -117,12 +120,13 @@ all the individuals in the study, represented by unique individualIDs.
 For humans, this includes information on age, sex, race, diagnosis, etc.
 For MODEL-AD mouse models, the individual metadata has information on
 model genotypes, stock numbers, diet, and more.
-```{r, eval=FALSE}
+
+```{r}
 # all individualIDs in the biospecimen file should be in the individual file
 all(bio_meta$individualID %in% ind_meta$individualID)
 ```
 
-```{r, eval=FALSE}
+```{r}
 # which model genotypes are in this study?
 distinct(ind_meta, genotype)
 ```
@@ -140,7 +144,7 @@ and the %\>% operator from the magrittr package. If you are unfamiliar
 with the pipe, think of it as a shorthand for “take this (the preceding
 object) and do that (the subsequent command)”. See here (https://magrittr.tidyverse.org/) 
 for more info on piping in R.
-```{r, eval=FALSE}
+```{r}
 # join all the rows in the assay metadata that have a match in the biospecimen metadata
 joined_meta <- rna_meta %>% #start with the rnaseq assay metadata
   left_join(bio_meta, by = "specimenID") %>%  #join rows from biospecimen that match specimenID 
@@ -154,7 +158,7 @@ metadata on each specimen in the RNAseq data from this study. This
 procedure can be used to join the three types of metadata files for
 every study in the AD Knowledge Portal, allowing you to filter
 individuals and specimens as needed based on your analysis criteria!
-```{r, eval=FALSE}
+```{r}
 library(lubridate)
 
 # convert columns of strings to month-date-year format
@@ -175,8 +179,8 @@ head(covars_5XFAD)
 ```
 
 We will save joined_meta for the next lesson.
-```{r, eval=FALSE}
-saveRDS(covars_5XFAD, file = "../data/covars_5XFAD.rds")
+```{r}
+saveRDS(covars_5XFAD, file = "data/covars_5XFAD.rds")
 ```
 
 ## Single Specimen files
@@ -243,7 +247,8 @@ annotations_table %>%
   dplyr::select(name, individualID, specimenID, isMultiSpecimen)
 ```
 The multispecimen file should contain a row or column of specimenIDs that correspond to the specimenIDs used in a study’s metadata, as we have seen with the 5XFAD counts file.
-```{r, eval=FALSE}
+
+```{r}
 # In this example, we take a slice of the counts data to reduce computation, transpose it so that each row represents a single specimen, and then join it to the joined metadata by the specimenID
 counts %>% 
   slice_head(n = 5) %>% 
