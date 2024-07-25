@@ -540,13 +540,13 @@ corresponding module<br></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">module_table</span> ,<span class="va">Module</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">module_table</span>, <span class="va">Module</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -622,16 +622,26 @@ that contain a mouse ortholog mapping:</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">ampad_modules</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="challenge-2" class="callout discussion">
+<div id="challenge-2" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="challenge-2" class="callout-inner">
 <h3 class="callout-title">Challenge 2<a class="anchor" aria-label="anchor" href="#challenge-2"></a>
 </h3>
 <div class="callout-content">
 <p>How many human genes are we removing that don’t have identified
-orthologs? :::::::::::::::::::::::: solution</p>
+orthologs?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -644,7 +654,7 @@ orthologs? :::::::::::::::::::::::: solution</p>
 </div>
 </div>
 </div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="reading-differential-expression-result-of-human-data-from-meta-analysis">Reading differential expression result of human data from
 meta-analysis<a class="anchor" aria-label="anchor" href="#reading-differential-expression-result-of-human-data-from-meta-analysis"></a>
@@ -841,19 +851,8 @@ required steps to perform the correlation with human AD modules.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">load</span><span class="op">(</span><span class="st">"results/DEAnalysis_5XFAD.Rdata"</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-'results/DEAnalysis_5XFAD.Rdata', probable reason 'No such file or directory'</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection</code></pre>
-</div>
 <p>We can also load AMP-AD module data.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -870,7 +869,7 @@ age-matched B6 mice).</p>
 <p>First, we’ll combine both mouse <code>DE_5xFAD.df</code> and human
 <code>ampad_modules_fc</code> log fold change data sets for all
 genes.</p>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -879,7 +878,7 @@ genes.</p>
 <p><strong>Note:</strong> for this join we specify
 <code>multiple = "all"</code> so that the same gene can be matched
 across multiple human tissues.</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -888,7 +887,7 @@ across multiple human tissues.</p>
 <p>Now we’ll create a list column containing data frames using <a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::nest</a>
 function. Nesting is implicitly a summarizing operation: you get one row
 for each group defined by the non-nested columns.</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -898,14 +897,14 @@ for each group defined by the non-nested columns.</p>
 <span>  <span class="fu">nest</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="va">symbol</span>, <span class="va">log2FoldChange</span>, <span class="va">ampad_fc</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Let’s take a look:</p>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre>
 </div>
 <p>And we can also look at some of the nested data:</p>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -915,7 +914,7 @@ for each group defined by the non-nested columns.</p>
 the TCXblue module; the mouse data corresponds to 4 month old male 5xFAD
 mice.</p>
 <p>The total number of groups in the data table:</p>
-<div class="codewrapper sourceCode" id="cb35">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -923,7 +922,7 @@ mice.</p>
 </div>
 <p>Next, we’ll compute correlation coefficients using the
 <code>cor.test</code> function:</p>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -944,7 +943,7 @@ including the computed correlation coefficient (<code>estimate</code>)
 and the significance (<code>p.value</code>).</p>
 <p>In the end we should have correlation coefficients and significance
 values for every comparison in our data table:</p>
-<div class="codewrapper sourceCode" id="cb37">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -957,7 +956,7 @@ values for every comparison in our data table:</p>
 the next step. We’ll add a column that flags whether the correlation is
 significant or not, and we’ll add in the information about which
 consensus cluster each module belongs to:</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -967,7 +966,7 @@ consensus cluster each module belongs to:</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">cluster</span>, <span class="va">cluster_label</span>, <span class="va">module</span>, <span class="va">model</span>, <span class="va">sex</span>, <span class="va">age</span>,</span>
 <span>                correlation <span class="op">=</span> <span class="va">estimate</span>, <span class="va">p_value</span>, <span class="va">significant</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb39">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -980,7 +979,7 @@ results<a class="anchor" aria-label="anchor" href="#step-3-create-a-dataframe-to
 <p>More preparations for plotting, here we’ll get all of the values in
 the right order so that they are grouped together nicely on the
 plot.</p>
-<div class="codewrapper sourceCode" id="cb40">
+<div class="codewrapper sourceCode" id="cb38">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1006,7 +1005,7 @@ plot.</p>
 <h3 id="visualizing-the-correlation-plot">Visualizing the Correlation plot<a class="anchor" aria-label="anchor" href="#visualizing-the-correlation-plot"></a></h3>
 <p>Now, we will use the above matrix and visualize the correlation
 results using <code>ggplot2</code> package functions.</p>
-<div class="codewrapper sourceCode" id="cb41">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1072,7 +1071,7 @@ between female 5xFAD mice at 4 months and 6 months. We can plot the
 individual correlations for each comparison in the plot above with the
 data we have. We’ll label genes with large fold change in the mouse
 using the <code>ggrepel::geom_label_repel</code> function.</p>
-<div class="codewrapper sourceCode" id="cb42">
+<div class="codewrapper sourceCode" id="cb40">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1104,7 +1103,7 @@ correlations are relatively weak and driven by individual genes that
 have relatively large changes (e.g. Heatr4, Nirp1a, Rpl39l). If we
 compare a different module, say STGblue, we can see a stronger
 relationship between the mouse and human expression.</p>
-<div class="codewrapper sourceCode" id="cb43">
+<div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1148,14 +1147,14 @@ show correlation and how does it compare with 5xFAD?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1284,37 +1283,16 @@ testing for overlap with GO terms and multiple test correction in one
 function.</p>
 <p>Let’s start by considering the enrichments from the mouse data
 analyzed previously.</p>
-<div class="codewrapper sourceCode" id="cb45">
+<div class="codewrapper sourceCode" id="cb43">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in theme_set(theme_bw()): could not find function "theme_set"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb47">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">load</span><span class="op">(</span><span class="st">'results/DEAnalysis_5XFAD.RData'</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-'results/DEAnalysis_5XFAD.RData', probable reason 'No such file or directory'</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection</code></pre>
+<code class="sourceCode R"><span><span class="fu">theme_set</span><span class="op">(</span><span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">load</span><span class="op">(</span><span class="st">'results/DEAnalysis_5XFAD.RData'</span><span class="op">)</span></span></code></pre>
 </div>
 <p>We’ll start by considering the genes that are significantly DE in 12
 month old male animals</p>
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb44">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1347,7 +1325,7 @@ representation of GO terms among the DEGs. First, we need to identify
 the universe of all possible genes which includes the genes that were
 both measured by the experiment and contained within the annotation
 set.</p>
-<div class="codewrapper sourceCode" id="cb51">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1359,7 +1337,7 @@ set.</p>
 <span>  <span class="fu">intersect</span><span class="op">(</span><span class="va">.</span>, <span class="va">DE_5xFAD.df</span><span class="op">$</span><span class="va">symbol</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Now let’s test for enriched GO terms (this can take 3-4 minutes)</p>
-<div class="codewrapper sourceCode" id="cb52">
+<div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1377,7 +1355,7 @@ set.</p>
 <span>                   <span class="op">)</span></span></code></pre>
 </div>
 <p>How many significant terms are identified:</p>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1397,14 +1375,14 @@ list if you do not specify the “universe”?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb54">
+<div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1416,7 +1394,7 @@ list if you do not specify the “universe”?</p>
 </div>
 </div>
 <p>Plot the top 10 significant terms:</p>
-<div class="codewrapper sourceCode" id="cb55">
+<div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1443,7 +1421,7 @@ overall distribution.</p>
 <code>clusterProfiler::gseGO()</code> function. First we’ll specify the
 gene list and use the <code>log2FoldChange</code> value to rank the
 genes in the list.</p>
-<div class="codewrapper sourceCode" id="cb56">
+<div class="codewrapper sourceCode" id="cb50">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1457,14 +1435,14 @@ genes in the list.</p>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="va">log2FoldChange</span>, name <span class="op">=</span> <span class="va">symbol</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Now we’ll test for enrichment:</p>
-<div class="codewrapper sourceCode" id="cb57">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enr</span> <span class="op">&lt;-</span> <span class="fu">gseGO</span><span class="op">(</span><span class="va">gene.list</span>, ont <span class="op">=</span> <span class="st">'all'</span>, OrgDb <span class="op">=</span> <span class="va">org.Mm.eg.db</span>, keyType <span class="op">=</span> <span class="st">'SYMBOL'</span><span class="op">)</span></span></code></pre>
 </div>
 <p>How many significant terms are identified:</p>
-<div class="codewrapper sourceCode" id="cb58">
+<div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1486,14 +1464,14 @@ results relates to the directionality of enrichment).</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb59">
+<div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1505,7 +1483,7 @@ results relates to the directionality of enrichment).</p>
 </div>
 </div>
 <p>Plot the term enrichments</p>
-<div class="codewrapper sourceCode" id="cb60">
+<div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1584,7 +1562,7 @@ Domains</a>.</p>
 </figure><div class="section level3">
 <h3 id="download-and-explore-the-biological-domain-annotations">Download and explore the biological domain annotations<a class="anchor" aria-label="anchor" href="#download-and-explore-the-biological-domain-annotations"></a></h3>
 <p>First let’s download the biodomain definition file from synapse.</p>
-<div class="codewrapper sourceCode" id="cb61">
+<div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1595,7 +1573,7 @@ Domains</a>.</p>
 <span><span class="va">dom.lab</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">synGet</span><span class="op">(</span><span class="st">'syn26856828'</span><span class="op">)</span><span class="op">$</span><span class="va">path</span><span class="op">)</span></span></code></pre>
 </div>
 <p>What is in the file?</p>
-<div class="codewrapper sourceCode" id="cb62">
+<div class="codewrapper sourceCode" id="cb56">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1611,7 +1589,7 @@ Ontology via the provided API, (2) <code>ensembl_id</code>,
 <code>entrez_id</code>, and <code>hgnc_symbol</code> are from BioMart
 annotations (e.g. <code>biomaRt::getLDS()</code>).</p>
 <p>We can see how many GO terms are annotated to each biodomain:</p>
-<div class="codewrapper sourceCode" id="cb63">
+<div class="codewrapper sourceCode" id="cb57">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1621,7 +1599,7 @@ annotations (e.g. <code>biomaRt::getLDS()</code>).</p>
 terms) up to <code>Synapse</code> (1,379 terms).</p>
 <p>We can also investigate the individual genes annotated to each
 biodomain GO term.</p>
-<div class="codewrapper sourceCode" id="cb64">
+<div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1638,7 +1616,7 @@ previously with the biological domain annotations and see if we can get
 more context about what is changing in that model. We’ll focus on the
 GSEA results and start by annotating the results with biodomain
 groupings.</p>
-<div class="codewrapper sourceCode" id="cb65">
+<div class="codewrapper sourceCode" id="cb59">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1656,7 +1634,7 @@ that the conception of the biodomains involved a requirement that they
 be modifiable, and these terms may be added to the biodomain
 definintions in the future. Let’s modify the <code>Biodomain</code>
 value for terms that aren’t annotated to a domain to ‘none’.</p>
-<div class="codewrapper sourceCode" id="cb66">
+<div class="codewrapper sourceCode" id="cb60">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1664,7 +1642,7 @@ value for terms that aren’t annotated to a domain to ‘none’.</p>
 <span><span class="fu">head</span><span class="op">(</span><span class="va">enr.bd</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></code></pre>
 </div>
 <p>How many terms are enriched from each domain?</p>
-<div class="codewrapper sourceCode" id="cb67">
+<div class="codewrapper sourceCode" id="cb61">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1680,7 +1658,7 @@ value for terms that aren’t annotated to a domain to ‘none’.</p>
 those that do, the vast majority map into the
 <code>Immune Response</code> biodomain.</p>
 <p>We can plot the enrichment results, stratified by biodomain:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb62">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1700,17 +1678,27 @@ those that do, the vast majority map into the
 <span>  <span class="fu">scale_fill_identity</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">scale_color_identity</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <figure><img src="results/biodom_plot.png" alt="ridgeplot" class="figure mx-auto d-block"><div class="figcaption">ridgeplot</div>
-</figure><div id="challenge-6" class="callout discussion">
+</figure><div id="challenge-6" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="challenge-6" class="callout-inner">
 <h3 class="callout-title">Challenge 6<a class="anchor" aria-label="anchor" href="#challenge-6"></a>
 </h3>
 <div class="callout-content">
 <p>How could you plot the results from the ORA to show biodomain
-enrichements? :::::::::::::::::::::::: solution</p>
-<div class="codewrapper sourceCode" id="cb69">
+enrichements?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
+</button>
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1756,7 +1744,7 @@ biodomain.</p>
 </div>
 </div>
 </div>
-<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="comparing-human-and-mouse-functional-enrichments">Comparing Human and Mouse functional enrichments<a class="anchor" aria-label="anchor" href="#comparing-human-and-mouse-functional-enrichments"></a></h3>
@@ -1765,7 +1753,7 @@ in the mouse models with functional enrichments from the AMP-AD cohorts.
 We can first take a look at the functional enrichments from the
 different human cohorts. To save some time, let’s load some pre-computed
 enrichment results for mouse &amp; human data.</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb64">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1780,7 +1768,7 @@ enrichment results for mouse &amp; human data.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in bind_rows(read_tsv("data/5xFAD_gsea_results.tsv", col_types = cols()) %&gt;% : could not find function "bind_rows"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb72">
+<div class="codewrapper sourceCode" id="cb66">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1792,7 +1780,7 @@ enrichment results for mouse &amp; human data.</p>
 <pre class="error" tabindex="0"><code>Error in read_tsv("data/Hsap_gsea_results.tsv", col_types = cols()): could not find function "read_tsv"</code></pre>
 </div>
 <p>The cohorts and tissues available are:</p>
-<div class="codewrapper sourceCode" id="cb74">
+<div class="codewrapper sourceCode" id="cb68">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1805,7 +1793,7 @@ enrichment results for mouse &amp; human data.</p>
 </div>
 <p>We can focus on one tissue per cohort, let’s look at TCX for Mayo,
 PHG for Mt Sinai, and DLPFC for ROSMAP.</p>
-<div class="codewrapper sourceCode" id="cb76">
+<div class="codewrapper sourceCode" id="cb70">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1842,7 +1830,7 @@ doesn’t have very many enriched terms. Let’s ignore the ROSMAP result
 for now and compare the terms enriched between Mayo TCX and the 5xFAD
 males. First we can join up the enriched terms between the sets into one
 data frame.</p>
-<div class="codewrapper sourceCode" id="cb77">
+<div class="codewrapper sourceCode" id="cb71">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1867,7 +1855,7 @@ data frame.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in bind_rows(hs.gsea %&gt;% filter(Study == "MAYO", Tissue == "TCX") %&gt;% : could not find function "%&gt;%"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb79">
+<div class="codewrapper sourceCode" id="cb73">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1879,7 +1867,7 @@ data frame.</p>
 <pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'comb_5x' not found</code></pre>
 </div>
 <p>Great! Now let’s annotate the biodomains and plot it up:</p>
-<div class="codewrapper sourceCode" id="cb81">
+<div class="codewrapper sourceCode" id="cb75">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1940,33 +1928,33 @@ more granular comparisons.</li>
 </div>
 </section><section><h2 class="section-heading" id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 <a class="anchor" aria-label="anchor" href="#session-info"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb82">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb76">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
-<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
-<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
-<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a></span>
-<span id="cb82-6"><a href="#cb82-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
-<span id="cb82-7"><a href="#cb82-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
-<span id="cb82-8"><a href="#cb82-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
-<span id="cb82-9"><a href="#cb82-9" tabindex="-1"></a></span>
-<span id="cb82-10"><a href="#cb82-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
-<span id="cb82-11"><a href="#cb82-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
-<span id="cb82-12"><a href="#cb82-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
-<span id="cb82-13"><a href="#cb82-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
-<span id="cb82-14"><a href="#cb82-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
-<span id="cb82-15"><a href="#cb82-15" tabindex="-1"></a></span>
-<span id="cb82-16"><a href="#cb82-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
-<span id="cb82-17"><a href="#cb82-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
-<span id="cb82-18"><a href="#cb82-18" tabindex="-1"></a></span>
-<span id="cb82-19"><a href="#cb82-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
-<span id="cb82-20"><a href="#cb82-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span id="cb82-21"><a href="#cb82-21" tabindex="-1"></a></span>
-<span id="cb82-22"><a href="#cb82-22" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
-<span id="cb82-23"><a href="#cb82-23" tabindex="-1"></a>[<span class="dv">1</span>] compiler_4.<span class="fl">4.1</span>  tools_4.<span class="fl">4.1</span>     yaml_2.<span class="fl">3.9</span>      knitr_1<span class="fl">.48</span>     </span>
-<span id="cb82-24"><a href="#cb82-24" tabindex="-1"></a>[<span class="dv">5</span>] xfun_0<span class="fl">.46</span>       renv_1.<span class="fl">0.7</span>      evaluate_0.<span class="fl">24.0</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
+<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
+<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
+<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a></span>
+<span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
+<span id="cb76-7"><a href="#cb76-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
+<span id="cb76-8"><a href="#cb76-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
+<span id="cb76-9"><a href="#cb76-9" tabindex="-1"></a></span>
+<span id="cb76-10"><a href="#cb76-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
+<span id="cb76-11"><a href="#cb76-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
+<span id="cb76-12"><a href="#cb76-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
+<span id="cb76-13"><a href="#cb76-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
+<span id="cb76-14"><a href="#cb76-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
+<span id="cb76-15"><a href="#cb76-15" tabindex="-1"></a></span>
+<span id="cb76-16"><a href="#cb76-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
+<span id="cb76-17"><a href="#cb76-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
+<span id="cb76-18"><a href="#cb76-18" tabindex="-1"></a></span>
+<span id="cb76-19"><a href="#cb76-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
+<span id="cb76-20"><a href="#cb76-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span id="cb76-21"><a href="#cb76-21" tabindex="-1"></a></span>
+<span id="cb76-22"><a href="#cb76-22" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
+<span id="cb76-23"><a href="#cb76-23" tabindex="-1"></a>[<span class="dv">1</span>] compiler_4.<span class="fl">4.1</span>  tools_4.<span class="fl">4.1</span>     yaml_2.<span class="fl">3.9</span>      knitr_1<span class="fl">.48</span>     </span>
+<span id="cb76-24"><a href="#cb76-24" tabindex="-1"></a>[<span class="dv">5</span>] xfun_0<span class="fl">.46</span>       renv_1.<span class="fl">0.7</span>      evaluate_0.<span class="fl">24.0</span></span></code></pre>
 </div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
