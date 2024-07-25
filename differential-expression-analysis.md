@@ -663,8 +663,8 @@ head(dseq_res)
 we can save results file into a csv file like this:
 
 ``` r
-write.csv(All_res,file="../results/All_5xFAD_12months_male.csv")
-write.csv(dseq_res,file="../results/DEG_5xFAD_12months_male.csv")
+write.csv(All_res,file="results/All_5xFAD_12months_male.csv")
+write.csv(dseq_res,file="results/DEG_5xFAD_12months_male.csv")
 ```
 
 **Volcano plot** 
@@ -939,7 +939,7 @@ binary format. The save command is useful when you want to save multiple
 objects in one file.
 
 ``` r
-save(DE_5xFAD.df,DE_5xFAD.list,file="../results/DEAnalysis_5XFAD.Rdata")
+save(DE_5xFAD.df,DE_5xFAD.list,file="results/DEAnalysis_5XFAD.Rdata")
 ```
 
 ## Session Info
