@@ -23,13 +23,7 @@ exercises: 40
 
 Author: Gregory Cary, Jackson Laboratory
 
-```{r setup, include=FALSE}
-#source("../bin/chunk-options.R")
-#knitr_fig_path("04-")
-```
-
-
-```{r libs, warning=FALSE, include=FALSE}
+```{r libs, warning=FALSE, include=FALSE, eval=FALSE}
 suppressPackageStartupMessages(library("DESeq2"))
 suppressPackageStartupMessages(library("ggplot2"))
 suppressPackageStartupMessages(library("AnnotationDbi"))
@@ -42,13 +36,13 @@ suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(clusterProfiler))
 suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(synapser))
+#suppressPackageStartupMessages(library(synapser))
 #synLogin(silent=TRUE)
 #setwd("/Users/pandera/Library/CloudStorage/Box-Box/Ravi Pandey Workspace/Miscellaneous/AD_Workshop2023/")
 ```
 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval=FALSE}
 synLogin(authToken = "eyJ0eXAiOiJKV1QiLCJraWQiOiJXN05OOldMSlQ6SjVSSzpMN1RMOlQ3TDc6M1ZYNjpKRU9VOjY0NFI6VTNJWDo1S1oyOjdaQ0s6RlBUSCIsImFsZyI6IlJTMjU2In0.eyJhY2Nlc3MiOnsic2NvcGUiOlsidmlldyIsImRvd25sb2FkIiwibW9kaWZ5Il0sIm9pZGNfY2xhaW1zIjp7fX0sInRva2VuX3R5cGUiOiJQRVJTT05BTF9BQ0NFU1NfVE9LRU4iLCJpc3MiOiJodHRwczovL3JlcG8tcHJvZC5wcm9kLnNhZ2ViYXNlLm9yZy9hdXRoL3YxIiwiYXVkIjoiMCIsIm5iZiI6MTcyMTc4OTUyNywiaWF0IjoxNzIxNzg5NTI3LCJqdGkiOiIxMDMxNSIsInN1YiI6IjMzNDc1MjgifQ.sr1euDKwv-U8PPj36ej7Kfo_Fne9KZOzu-fWZ2qeka8SsLwAs26z6623QyVUGHK2RoF_LeZ479d465BXxW3z47kbUUAJguzTVLlrB7pRHrvl7fFEAEq0fC6pQzv-WYYHuys7mB6HfAICJXpL2zHWA32OjKUjfI3_eIRZw9yyBFmrDHo8OSLH3PED6E_CNs2Ydhl_V8F9lsN5UTOLWyc6Rz-UR--JdzW7nLFGlKScwb0YxJyw15K0MMjNg8yBxZCxPCsD18AWGZNh4nI7ppod7wMaJG3J1akujRqNqYPJftPKN7BT_0hpgISsY3I8djbFzMVy7MlfUIRgkPfmp68GBQ")
 ```
 
@@ -166,13 +160,13 @@ co-expression modules. These data are available from the
 [Synapse data repository](https://www.synapse.org/Synapse:syn11932957); 
 let's download and take a closer look at the data. 
 
-```{r AMP-AD1, warning=FALSE, message=FALSE}
+```{r AMP-AD1, warning=FALSE, message=FALSE, eval=FALSE}
 query <- synTableQuery("SELECT * FROM syn11932957")
 module_table <- read.table(query$filepath, sep = ",",header = TRUE)
 ```
 
 Let's look at module table
-```{r}
+```{r, eval=FALSE}
 head(module_table)
 ```
 
@@ -184,22 +178,22 @@ Here you see 9 columns in this table. Columns we're interested in are:
 - column 9: `external_gene_name` are gene symbols  
 
 How many unique modules are in the table?
-```{r}
+```{r, eval=FALSE}
 length(unique(module_table$Module))
 ```
 
 What are the names of the modules?
-```{r}
+```{r, eval=FALSE}
 unique(module_table$Module)
 ```
 
 How many genes are in each module?
-```{r}
+```{r, eval=FALSE}
 table(module_table$Module)
 ```
 
 We can visualize this as bar plot using ggplot2 package. 
-```{r module_nGenes, fig.width=7}
+```{r module_nGenes, fig.width=7, eval=FALSE}
 ggplot(module_table,aes(y=Module)) + 
   geom_bar() + 
   theme_bw() 
@@ -218,7 +212,7 @@ ggplot(module_table,aes(y=Module)) +
 {: .challenge}
 
 We can also check the total number of unique genes in the table  
-```{r}
+```{r, eval=FALSE}
 length(unique(module_table$GeneID))
 ```
 
@@ -236,12 +230,12 @@ of Orthology Predictions ([HCOP](https://www.genenames.org/tools/hcop/)) tool.
 While there are a variety of different ways to get data about gene orthology, 
 for the sake of simplicity we are going to read that table from [Synapse](https://doi.org/10.7303/syn17010253.1).  
 
-```{r AMP-AD2, warning=FALSE, message=FALSE}
+```{r AMP-AD2, warning=FALSE, message=FALSE, eval=FALSE}
 mouse.human.ortho <- fread(synapser::synGet("syn17010253")$path,check.names = F,header=T)
 ```
 
 Let's take a look at the first few rows of this orthology table:  
-```{r}
+```{r, eval=FALSE}
 head(mouse.human.ortho)
 ```
 
@@ -249,7 +243,7 @@ There are 15 columns with various gene identifiers for each species. We'll add
 mouse gene symbols from the ortholog table to the  module table by matching the 
 human ENSEMBL IDs from both tables.  
 
-```{r , warning=FALSE, message=FALSE}
+```{r , warning=FALSE, message=FALSE, eval=FALSE}
 module_table$Mouse_gene_name <-
   mouse.human.ortho$mouse_symbol[
     match(module_table$GeneID,mouse.human.ortho$human_ensembl_gene)
@@ -259,21 +253,21 @@ module_table$Mouse_gene_name <-
 Taking a look at the module table, we can see the new column of mouse orthologs 
 we just added.  
 
-```{r}
+```{r, eval=FALSE}
 head(module_table)
 ```
 
 Some genes don't have identified orthologs. Also there's some redundant 
 information. Let's only keep the columns of interest and rows that contain a 
 mouse ortholog mapping:  
-```{r}
+```{r, eval=FALSE}
 ampad_modules <- module_table %>%
   distinct(tissue = brainRegion, module = Module, gene = GeneID, Mouse_gene_name) %>%
   filter(Mouse_gene_name != "")
 ```
 
 Take a look at this new data table: 
-```{r}
+```{r, eval=FALSE}
 head(ampad_modules)
 ```
 
@@ -303,17 +297,17 @@ reprocessed AMP-AD RNA-seq data (all 7 brain regions). Log fold change values
 for human transcripts can be obtained from 
 [Synapse](https://www.synapse.org/#!Synapse:syn14237651).  
 
-```{r AMP-AD3, warning=FALSE, message=FALSE}
+```{r AMP-AD3, warning=FALSE, message=FALSE, eval=FALSE}
 ampad_modules_raw <- fread(synapser::synGet("syn14237651")$path,check.names = F,header=T)
 ```
 
 Let's take a look at these data  
-```{r}
+```{r, eval=FALSE}
 head(ampad_modules_raw)
 ```
 
 Data from which tissues are in this table?  
-```{r}
+```{r, eval=FALSE}
 unique(ampad_modules_raw$Tissue)
 ```
 
@@ -322,7 +316,7 @@ All 7 brain regions are represented.
 The AMP-AD data has been processed many ways and using different models and 
 comparisons. Let's take a look at how many ways the data have been analyzed:  
 
-```{r}
+```{r, eval=FALSE}
 ampad_modules_raw %>% select(Model, Comparison) %>% distinct()
 ```
 
@@ -330,7 +324,7 @@ For our analyses we'll use data from the "Diagnosis" model and comparisons
 between AD cases vs controls. We'll filter the table for these conditions and 
 only keep the three columns we'll need: `Tissue`, `Gene` and `logFC`.  
 
-```{r AMP-AD4, warning=FALSE, message=FALSE}
+```{r AMP-AD4, warning=FALSE, message=FALSE, eval=FALSE}
 ampad_fc <- ampad_modules_raw %>%
   as_tibble() %>%
   filter(Model == "Diagnosis", Comparison == "AD-CONTROL") %>%
@@ -345,7 +339,7 @@ Next, we will combine the fold change table we just downloaded (`ampad_fc`) and
 module table from before (`ampad_modules`). First, let's look at both tables to 
 check how can we merge them together?
 
-```{r}
+```{r, eval=FALSE}
 head(ampad_fc)
 head(ampad_modules)
 ```
@@ -358,7 +352,7 @@ merge the data sets using these two columns.
 only be in one module per brain region. Let's double check using the first gene 
 in the table:
 
-```{r}
+```{r, eval=FALSE}
 ampad_modules[ampad_modules$gene %in% "ENSG00000168439",]
 ```
 
@@ -366,13 +360,13 @@ This gene is present in six different co-expression modules all from different
 brain regions. You can do this for any other gene as well.
 
 We'll merge the two tables using the `dplyr::inner_join` function:
-```{r AMP-AD5, warning=FALSE, message=FALSE}
+```{r AMP-AD5, warning=FALSE, message=FALSE, eval=FALSE}
 ampad_modules_fc <- inner_join(ampad_modules, ampad_fc, by = c("gene", "tissue")) %>% 
   dplyr::select(symbol = Mouse_gene_name, module, ampad_fc) 
 ```
 
 Take a look at the new table we just made:  
-```{r}
+```{r, eval=FALSE}
 head(ampad_modules_fc)
 ```
 
@@ -384,7 +378,7 @@ Let's package up these data and save this progress so far. This is some manual
 book-keeping to arrange the modules into consensus clusters for plotting later. 
 You can just copy-paste this code into your `Rstudio` session.
 
-```{r module}
+```{r module, eval=FALSE}
 cluster_a <- tibble(
   module = c("TCXblue", "PHGyellow", "IFGyellow"),
   cluster = "Consensus Cluster A (ECM organization)",
@@ -464,12 +458,12 @@ We'll first read the result table saved after differential analysis in last [les
 We'll start with the data from the 5xFAD mouse model to understand the required 
 steps to perform the correlation with human AD modules.
 ```{r FAD}
-load("../results/DEAnalysis_5XFAD.Rdata")
+load("results/DEAnalysis_5XFAD.Rdata")
 ```
 
 We can also load AMP-AD module data.
 ```{r}
-load("../data/AMPAD_Module_Data.RData")
+load("data/AMPAD_Module_Data.RData")
 ```
 
 
@@ -482,14 +476,14 @@ model (log fold change of the 5xFAD mice vs sex- and age-matched B6 mice).
 First, we'll combine both mouse `DE_5xFAD.df` and human `ampad_modules_fc` log 
 fold change data sets for all genes.
 
-```{r step1, message=FALSE, warning=FALSE}
+```{r step1, message=FALSE, warning=FALSE, eval=FALSE}
 model_vs_ampad <- inner_join(DE_5xFAD.df, ampad_modules_fc, by = c("symbol"), multiple = "all") 
 ```
 
 **Note:** for this join we specify `multiple = "all"` so that the same gene can 
 be matched across multiple human tissues.
 
-```{r}
+```{r, eval=FALSE}
 head(model_vs_ampad)
 ```
 
@@ -497,7 +491,7 @@ Now we'll create a list column containing data frames using [tidyr::nest](https:
 Nesting is implicitly a summarizing operation: you get one row for each group 
 defined by the non-nested columns. 
 
-```{r}
+```{r, eval=FALSE}
 df <- model_vs_ampad %>%
   dplyr::select(module, model, sex, age, symbol, log2FoldChange, ampad_fc) %>%
   group_by(module, model, sex, age) %>%
@@ -505,12 +499,12 @@ df <- model_vs_ampad %>%
 ```
 
 Let's take a look:  
-```{r}
+```{r, eval=FALSE}
 head(df)
 ```
 
 And we can also look at some of the nested data: 
-```{r}
+```{r, eval=FALSE}
 head(df$data[[1]])
 ```
 
@@ -518,12 +512,12 @@ These are the mouse and human log fold-change values for all genes in the
 TCXblue module; the mouse data corresponds to 4 month old male 5xFAD mice.
 
 The total number of groups in the data table:
-```{r}
+```{r, eval=FALSE}
 dim(df)
 ```
 
 Next, we'll compute correlation coefficients using the `cor.test` function:  
-```{r}
+```{r, eval=FALSE}
 cor.df <- df  %>%
   mutate(
       cor_test = map(data, ~ cor.test(.x[["log2FoldChange"]], 
@@ -543,7 +537,7 @@ every entry in the `data` column. We can pull out specific features from the
 In the end we should have correlation coefficients and significance values for 
 every comparison in our data table:
 
-```{r}
+```{r, eval=FALSE}
 head(cor.df)
 ```
 
@@ -554,7 +548,7 @@ step. We'll add a column that flags whether the correlation is significant or
 not, and we'll add in the information about which consensus cluster each module 
 belongs to:
 
-```{r step2, message=FALSE, warning=FALSE}
+```{r step2, message=FALSE, warning=FALSE, eval=FALSE}
 model_module <- cor.df %>%
   mutate(significant = p_value < 0.05) %>%
   left_join(module_clusters, by = "module") %>%
@@ -562,14 +556,14 @@ model_module <- cor.df %>%
                 correlation = estimate, p_value, significant)
 ```
 
-```{r}
+```{r, eval=FALSE}
 head(model_module)
 ```
 
 #### Step 3: Create a dataframe to use as input for plotting the results
 More preparations for plotting, here we'll get all of the values in the right 
 order so that they are grouped together nicely on the plot.
-```{r step3, message=FALSE, warning=FALSE}
+```{r step3, message=FALSE, warning=FALSE, eval=FALSE}
 order.model <- c("5xFAD (Male)", "5xFAD (Female)")
 
 correlation_for_plot <- model_module %>%
@@ -592,7 +586,7 @@ head(correlation_for_plot)
 Now, we will use the above matrix and visualize the correlation results using 
 `ggplot2` package functions.
 
-```{r AMPAD1, message=FALSE, warning=FALSE, fig.width = 16, fig.height = 4, fig.show='hide'}
+```{r AMPAD1, message=FALSE, warning=FALSE, fig.width = 16, fig.height = 4, fig.show='hide', eval=FALSE}
 data <- correlation_for_plot
 range(correlation_for_plot$correlation)
 
@@ -634,7 +628,7 @@ ggplot2::ggplot() +
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 png(file="../results/AMPAD1.png", width=16, height=4, units="in", res = 1200)
 ggplot2::ggplot() +
   ggplot2::geom_tile(data = data, ggplot2::aes(x = .data$module, y = .data$model_sex), colour = "black", fill = "white") +
@@ -685,7 +679,7 @@ at 4 months and 6 months. We can plot the individual correlations for each
 comparison in the plot above with the data we have. We'll label genes with large 
 fold change in the mouse using the `ggrepel::geom_label_repel` function. 
 
-```{r fig.width=8, fig.height=4, fig.show='hide'}
+```{r fig.width=8, fig.height=4, fig.show='hide', eval=FALSE}
 # specify which comparisons to consider
 m <- 'FPbrown'
 s <- 'female'
@@ -709,7 +703,7 @@ ggplot(indiv.corr, aes( log2FoldChange , ampad_fc ))+
   theme_bw()
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 # specify which comparisons to consider
 m <- 'FPbrown'
 s <- 'female'
@@ -742,7 +736,7 @@ relatively large changes (e.g. Heatr4, Nirp1a, Rpl39l). If we compare a
 different module, say STGblue, we can see a stronger relationship between the 
 mouse and human expression.
 
-```{r fig.width=8, fig.height=4, fig.show='hide'}
+```{r fig.width=8, fig.height=4, fig.show='hide', eval=FALSE}
 m <- 'STGblue'
 s <- 'female'
 a <- c('4 mo','12 mo')
@@ -764,7 +758,7 @@ ggplot(indiv.corr, aes( log2FoldChange , ampad_fc ))+
   
 ```
 
-```{r, echo=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 # specify which comparisons to consider
 m <- 'STGblue'
 s <- 'female'
@@ -931,7 +925,7 @@ previously.
 
 ```{r}
 theme_set(theme_bw())
-load('../results/DEAnalysis_5XFAD.RData')
+load('results/DEAnalysis_5XFAD.RData')
 ```
 
 We'll start by considering the genes that are significantly DE in 12 month old 

@@ -24,7 +24,7 @@ mutations?
 
 # Differential Expression Analysis
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 # When the following query arises, type 'a'
 # Update all/some/none? [a/s/n]: a
 
@@ -59,12 +59,12 @@ In this lesson, we will use the raw counts matrix and metadata
 downloaded in the previous lesson and will perform differential
 expression analysis.
 ```{r}
-counts <- read.delim("../data/htseqcounts_5XFAD.txt", check.names = FALSE)
+counts <- read.delim("data/htseqcounts_5XFAD.txt", check.names = FALSE)
 ```
 
 **Reading Sample Metadata from Previous Lesson**
 ```{r}
-covars <- readRDS("../data/covars_5XFAD.rds")
+covars <- readRDS("data/covars_5XFAD.rds")
 ```
 
 Let’s explore the data:
@@ -116,12 +116,14 @@ Now, as we see that gene_id is in first column of count matrix, but we
 will need only count data in matrix, so we will change the gene_id
 column to rownames. Converting the gene_id as rownames of count matrix
 ```{r}
-counts <- counts %>% column_to_rownames(.,var="gene_id") %>% as.data.frame()
+counts <- counts %>% 
+  column_to_rownames(.,var="gene_id") %>% 
+  as.data.frame()
 ```
 
 let’s confirm if change is done correctly
 ```{r}
-head(counts,n=5)
+head(counts, n=5)
 ```
 
 As you can see from count table there are some genes that start with
@@ -154,10 +156,13 @@ count_tpose <- counts  %>%
                 rownames_to_column(.,var="gene_id") %>% 
                 filter(gene_id %in% c("ENSG00000080815","ENSMUSG00000019969","ENSG00000142192","ENSMUSG00000022892")) %>% 
                 pivot_longer(.,cols = -"gene_id",names_to = "specimenID",values_to="counts") %>% as.data.frame() %>%
-                left_join(covars ,by="specimenID") %>% as.data.frame()
+                left_join(covars, by="specimenID") %>% as.data.frame()
+
 head(count_tpose) 
 ```
-Rename the APP and PSEN1 genes to specify whether mouse or human
+
+Rename the APP and PSEN1 genes to specify whether mouse or human.
+
 ```{r}
 #make the age column a factor and re-order the levels
 count_tpose$timepoint <- factor(count_tpose$timepoint,levels=c("4 mo","6 mo","12 mo"))
@@ -169,7 +174,8 @@ count_tpose$gene_id[count_tpose$gene_id %in% "ENSMUSG00000022892"] <- "Mouse App
 count_tpose$gene_id[count_tpose$gene_id %in% "ENSMUSG00000019969"] <- "Mouse Psen1"
 ```
 
-Visualize orthologous genes
+Visualize orthologous genes.
+
 ```{r}
 #Create simple box plots showing normalized counts by genotype and time point, faceted by sex.
 count_tpose %>% 
@@ -201,7 +207,6 @@ Let’s verify if expression of both human genes have been merged or not:
 ```{r}
 counts[,1:6] %>% 
   filter(!str_detect(rownames(.), "MUS"))
-
 ```
 
 What proportion of genes have zero counts in all samples?
@@ -233,7 +238,6 @@ variable name
 ```{r}
 rawdata <- counts[,sort(colnames(counts))]
 metadata <- covars[sort(rownames(covars)),]
-
 ```
 
 subset the counts matrix and sample metadata to include only 12 month
@@ -259,13 +263,13 @@ match(colnames(dat),rownames(meta.12M.Male))
 ```
 
 Next, we build the DESeqDataSet using the following function:
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq <- DESeqDataSetFromMatrix(countData=dat, 
                                    colData=meta.12M.Male, 
                                    design = ~genotype)
 ```
 
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq
 ```
 
@@ -281,7 +285,7 @@ differential expression are not plotted.
 
 Here we perform a minimal pre-filtering to keep only rows that have at
 least 10 reads total.
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq <- ddsHTSeq[rowSums(counts(ddsHTSeq)) >= 10,]
 
 ddsHTSeq
@@ -296,13 +300,13 @@ represents the control group), the comparisons will be based on the
 alphabetical order of the levels.
 
 specifying the reference-level to 5XFAD_noncarrier:
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq$genotype <- relevel(ddsHTSeq$genotype,ref="5XFAD_noncarrier")  
 ```
 
 Run the standard differential expression analysis steps that is wrapped
 into a single function, DESeq.
-```{r}
+```{r, eval=FALSE}
 dds <- DESeq(ddsHTSeq,parallel = TRUE)
 ```
 
@@ -311,30 +315,30 @@ a results table with log2 fold changes, p values and adjusted p values.
 By default the argument alpha is set to 0.1. If the adjusted p value
 cutoff will be a value other than 0.1, alpha should be set to that
 value:
-```{r}
+```{r, eval=FALSE}
 res <- results(dds,alpha=0.05)  # setting 0.05 as significant threshold
 res
 ```
 
 We can order our results table by the smallest p value:
-```{r}
+```{r, eval=FALSE}
 resOrdered <- res[order(res$pvalue),]
 
 head(resOrdered,n=10)
 ```
 
 we can summarize some basic tallies using the summary function.
-```{r}
+```{r, eval=FALSE}
 summary(res)
 ```
 
 How many adjusted p-values were less than 0.05?
-```{r}
+```{r, eval=FALSE}
 sum(res$padj < 0.05, na.rm=TRUE)
 ```
 
 How many adjusted p-values were less than 0.1?
-```{r}
+```{r, eval=FALSE}
 sum(res$padj < 0.1, na.rm=TRUE)
 ```
 
@@ -344,7 +348,7 @@ We’ll use a package
 to translate mouse ENSEMBL IDS to gene names. Run this function and they
 will be called up when assembling results from the differential
 expression analysis
-```{r}
+```{r, eval=FALSE}
 map_function.df <- function(x, inputtype, outputtype) {
   mapIds(
     org.Mm.eg.db,
@@ -359,7 +363,7 @@ map_function.df <- function(x, inputtype, outputtype) {
 **Generating Results table**
 
 Here we will call the function to get the 'symbol' names of the genes incorporated into the results table, along with the columns we are most interested in
-```{r}
+```{r, eval=FALSE}
 All_res <- as.data.frame(res) %>% 
   mutate(symbol = map_function.df(res,"ENSEMBL","SYMBOL")) %>%    ##run map_function to add symbol of gene corresponding to ENSEBL ID
   mutate(EntrezGene = map_function.df(res,"ENSEMBL","ENTREZID")) %>%  ##run map_function to add Entrez ID of gene corresponding to ENSEBL ID
@@ -371,17 +375,17 @@ head(All_res)
 **Extracting genes that are significantly expressed**
 
 Let's subset all the genes with a pvalue < 0.05
-```{r}
+```{r, eval=FALSE}
 dseq_res <- subset(All_res[order(All_res$padj), ], padj < 0.05)
 ```
 
 Wow! We have a lot of genes with apparently very strong statistically
 significant differences between the control and 5xFAD carrier.
-```{r}
+```{r, eval=FALSE}
 dim(dseq_res)
 ```
 
-```{r}
+```{r, eval=FALSE}
 head(dseq_res)
 ```
 
@@ -390,7 +394,7 @@ head(dseq_res)
 **Exporting results to CSV files** 
 
 we can save results file into a csv file like this:
-```{r}
+```{r, eval=FALSE}
 write.csv(All_res,file="../results/All_5xFAD_12months_male.csv")
 write.csv(dseq_res,file="../results/DEG_5xFAD_12months_male.csv")
 ```
@@ -403,7 +407,7 @@ volcano plot, only a single data-frame, data-matrix, or tibble of test
 results is required, containing point labels, log2FC, and adjusted or
 unadjusted P values. The default cut-off for log2FC is \>\|2\|; the
 default cut-off for P value is 10e-6.
-```{r}
+```{r, eval=FALSE}
 EnhancedVolcano(All_res,
                                    lab = (All_res$symbol),
                                    x = 'log2FoldChange',
@@ -423,16 +427,16 @@ genes are upregulated in the 5XFAD strain.
 **Principal component plot of the samples**
 
 Principal component analysis is a dimension reduction technique that reduces the dimensionality of these large matrixes into a linear coordinate system, so that we can more easily visualize what factors are contributing the most to variation in the dataset by graphing the principal components. 
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq <- DESeqDataSetFromMatrix(countData=as.matrix(rawdata), colData=metadata, design= ~ genotype)
 ```
 
-```{r}
+```{r, eval=FALSE}
 ddsHTSeq <- ddsHTSeq[rowSums(counts(ddsHTSeq)>1) >= 10, ]
 dds <- DESeq(ddsHTSeq,parallel = TRUE)
 ```
 
-```{r}
+```{r, eval=FALSE}
 vsd <- varianceStabilizingTransformation(dds, blind=FALSE)
 
 plotPCA(vsd, intgroup=c("genotype", "sex","timepoint"))
@@ -440,7 +444,7 @@ plotPCA(vsd, intgroup=c("genotype", "sex","timepoint"))
 We can see that clustering is occurring, though it's kind of hard to see exactly how they are clustering in this visualization.
 
 It is also possible to customize the PCA plot using the ggplot function.
-```{r}
+```{r, eval=FALSE}
 pcaData <- plotPCA(vsd, intgroup=c("genotype", "sex","timepoint"), returnData=TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 ggplot(pcaData, aes(PC1, PC2,color=genotype, shape=sex)) + 
@@ -461,8 +465,8 @@ molecular changes in animals.
 Finally, we can build a function for differential analysis that consists of all 
 above discussed steps. It will require to input sorted raw count matrix, sample 
 metadata and define the reference group.
-```{r}
-DEG <- function(rawdata,meta,
+```{r, eval=FALSE}
+DEG <- function(rawdata, meta,
                    include.batch = FALSE,
                    ref = ref) {
   dseq_res <- data.frame()
@@ -527,7 +531,7 @@ comparisons
 
 Finally, we implement our DEG function on each case/control comparison of
 interest and store the result table in a list and data frame:
-```{r}
+```{r, eval=FALSE}
 # initiate an empty list and data frame to save results
 DE_5xFAD.list <- list()
 DE_5xFAD.df <- data.frame()
@@ -547,40 +551,40 @@ for (i in 1:nrow(comparisons))
 ```
 
 Let’s explore the result stored in our list:
-```{r}
+```{r, eval=FALSE}
 names(DE_5xFAD.list)
 ```
 
 We can easily extract the result table for any group of interest by using \$
 and name of group. Let’s check top few rows from 5XFAD_carrier-male-4 mo
 group:
-```{r}
+```{r, eval=FALSE}
 head(DE_5xFAD.list$`5XFAD_carrier-male-4 mo`)
 ```
 
 Let’s check the result stored as dataframe:
-```{r}
+```{r, eval=FALSE}
 head(DE_5xFAD.df)
 ```
 
 Check if result is present for all ages:
-```{r}
+```{r, eval=FALSE}
 unique((DE_5xFAD.df$age))
 ```
 
 Check if result is present for both sexes:
-```{r}
+```{r, eval=FALSE}
 unique((DE_5xFAD.df$sex))
 ```
 
 Check number of genes in each group:
-```{r}
+```{r, eval=FALSE}
 dplyr::count(DE_5xFAD.df,model,sex,age)
 ```
 
 Check number of genes significantly differentially expressed in all
 cases compared to age and sex-matched controls:
-```{r}
+```{r, eval=FALSE}
 degs.up <- map(DE_5xFAD.list, ~length(which(.x$padj<0.05 & .x$log2FoldChange>0)))
 degs.down <- map(DE_5xFAD.list, ~length(which(.x$padj<0.05 & .x$log2FoldChange<0)))
 deg <- data.frame(Cases=names(degs.up), Up_DEGs.pval.05=as.vector(unlist(degs.up)),Down_DEGs.pval.05=as.vector(unlist(degs.down)))
@@ -597,7 +601,7 @@ We may wish to look for enrichment of biological
 pathways in a list of differentially expressed genes. Here we will test
 for enrichment of KEGG pathways using using enrichKEGG function in
 clusterProfiler package.
-```{r}
+```{r, eval=FALSE}
 dat <- list(FAD_M_4=subset(DE_5xFAD.list$`5XFAD_carrier-male-4 mo`[order(DE_5xFAD.list$`5XFAD_carrier-male-4 mo`$padj), ], padj < 0.05) %>% pull(EntrezGene),
             FAD_F_4=subset(DE_5xFAD.list$`5XFAD_carrier-female-4 mo`[order(DE_5xFAD.list$`5XFAD_carrier-female-4 mo`$padj), ], padj < 0.05) %>% pull(EntrezGene))
 
@@ -613,7 +617,7 @@ enrich_pathway@compareClusterResult$Description <- gsub(" - Mus musculus \\(hous
 
 Let’s plot top enriched functions using dotplot function of
 clusterProfiler package.
-```{r}
+```{r, eval=FALSE}
 clusterProfiler::dotplot(enrich_pathway,showCategory=10,font.size = 14,title="Enriched KEGG Pathways")
 ```
 
@@ -628,7 +632,7 @@ lesson. Save it now and we will load it at the beginning of the next
 lesson. We will use R’s save command to save the objects in compressed,
 binary format. The save command is useful when you want to save multiple
 objects in one file.
-```{r}
+```{r, eval=FALSE}
 save(DE_5xFAD.df,DE_5xFAD.list,file="../results/DEAnalysis_5XFAD.Rdata")
 ```
 
