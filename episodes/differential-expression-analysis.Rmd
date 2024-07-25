@@ -6,7 +6,8 @@ exercises: 10
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- What transcriptomic changes do we observe in mouse models carrying AD-related mutations?
+- What transcriptomic changes do we observe in mouse models carrying AD-related 
+mutations?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -23,36 +24,16 @@ exercises: 10
 
 # Differential Expression Analysis
 
-```{r}
-# When the following query arises, type 'a'
-# Update all/some/none? [a/s/n]: a
-
-#When the following query arises, type 'n' (it is faster)
-# Do you want to install from sources the packages which need compilation? (Yes/no/cancel) n
-
-if (!requireNamespace("BiocManager", quietly = TRUE))
-
-    install.packages("BiocManager")
-
-BiocManager::install("clusterProfiler")
-BiocManager::install("DESeq2")
-BiocManager::install("AnnotationDbi")
-BiocManager::install("org.Mm.eg.db")
-BiocManager::install("GO.db")
-BiocManager::install("EnhancedVolcano")
-```
 
 **Load libraries**
 
-```{r}
+```{r, echo=FALSE}
 suppressPackageStartupMessages(library("DESeq2"))
-suppressPackageStartupMessages(library("ggplot2"))
 suppressPackageStartupMessages(library("AnnotationDbi"))
 suppressPackageStartupMessages(library("org.Mm.eg.db"))
 suppressPackageStartupMessages(library("GO.db"))
 suppressPackageStartupMessages(library("EnhancedVolcano"))
-suppressPackageStartupMessages(library(tidyverse))
-suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library("tidyverse"))
 suppressPackageStartupMessages(library("clusterProfiler"))
 ```
 
