@@ -12,16 +12,16 @@ RStudio development environment.
 
 ### R
 
-Please download and install [R](https://cran.r-project.org/). To interact with R, we use 
-[RStudio](https://posit.co/download/rstudio-desktop/). If you don't have administrative 
-rights to your laptop, please ask the IT help desk to install software for you. Once 
-you have installed R and RStudio, open RStudio to verify that the installation 
-was successful.
+Please download and install [R](https://cran.r-project.org/). To interact with 
+R, we use [RStudio](https://posit.co/download/rstudio-desktop/). If you don't 
+have administrative rights to your laptop, please ask the IT help desk to 
+install software for you. Once you have installed R and RStudio, open RStudio to 
+verify that the installation was successful.
 
 ### Package Installation
 
-Next, install the required packages for this lesson. In RStudio, copy and paste the 
-following commands into the Console:
+Next, install the required packages for this lesson. In RStudio, copy and paste 
+the following commands into the Console:
 
 ```r
 # install synapser
@@ -29,6 +29,7 @@ install.packages("synapser", repos = c("http://ran.synapse.org", "http://cran.fh
 
 # install tidyverse if you don't already have it
 install.packages("tidyverse")
+install.packages("dplyr")
 install.packages("lubridate")
 ```
 
@@ -38,13 +39,16 @@ the console to verify that packages installed correctly.
 ```r
 library(synapser)
 library(tidyverse)
+library(dplyr)
+library(lubridate)
 ```
 
 Next, you will need to log in to your Synapse account.
 
-*Login option 1*: Synapser takes credentials from your Synapse web session. If you are 
-logged into the Synapse web browser, synapser will automatically use your login 
-credentials to log you in during your R session! All you have to do is:
+*Login option 1*: Synapser takes credentials from your Synapse web session. If 
+you are logged into the Synapse web browser, synapser will automatically use 
+your login credentials to log you in during your R session! All you have to do 
+is:
 
 ```r
 synLogin()
@@ -52,8 +56,8 @@ synLogin()
 
 If for whatever reason that didn’t work, try one of these options:
 
-*Login option 2*: Synapse username and password In the code below, replace the `< >` with 
-your Synapse username and password.
+*Login option 2*: Synapse username and password In the code below, replace the 
+`< >` with your Synapse username and password.
 
 ```r
 synLogin("<username>", "<password>")
@@ -72,7 +76,35 @@ synLogin(authToken = "<paste your personal access token here>")
 For more information on managing Synapse credentials with synapser, see
 the documentation here: https://r-docs.synapse.org/articles/manageSynapseCredentials.html.
 
+```r
+# When the following query arises, type 'a'
+# Update all/some/none? [a/s/n]: a
 
+# When the following query arises, type 'n' (it is faster)
+# Do you want to install from sources the packages which need compilation? 
+# (Yes/no/cancel) n
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+
+    install.packages("BiocManager")
+
+BiocManager::install("clusterProfiler")
+BiocManager::install("DESeq2")
+BiocManager::install("AnnotationDbi")
+BiocManager::install("org.Mm.eg.db")
+BiocManager::install("org.Hs.eg.db")
+BiocManager::install("GO.db")
+BiocManager::install("EnhancedVolcano")
+```
+```r
+suppressPackageStartupMessages(library("DESeq2"))
+suppressPackageStartupMessages(library("AnnotationDbi"))
+suppressPackageStartupMessages(library("org.Mm.eg.db"))
+suppressPackageStartupMessages(library("org.Hs.eg.db"))
+suppressPackageStartupMessages(library("GO.db"))
+suppressPackageStartupMessages(library("EnhancedVolcano"))
+suppressPackageStartupMessages(library("clusterProfiler"))
+```
 
 ## Project Setup
 
