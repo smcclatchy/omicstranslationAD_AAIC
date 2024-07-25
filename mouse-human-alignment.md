@@ -187,17 +187,23 @@ ggplot(module_table,aes(y=Module)) +
   theme_bw() 
 ```
 
-> ## Challenge 1
-> What are other ways to count genes in each module? 
->
-> > ## Solution to Challenge 1
-> >
-> > ~~~
-> > dplyr::count(module_table ,Module)
-> > ~~~
-> > {: .language-r}
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 1
+
+What are other ways to count genes in each module? 
+
+:::::::::::::::::::::::: solution 
+
+```r
+dplyr::count(module_table ,Module)
+```
+
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 We can also check the total number of unique genes in the table  
 
@@ -266,20 +272,25 @@ Take a look at this new data table:
 head(ampad_modules)
 ```
 
-> ## Challenge 2
-> How many human genes are we removing that don't have identified orthologs? 
->
-> > ## Solution to Challenge 2
-> >
-> > ~~~
-> > dplyr::filter(module_table, is.na(Mouse_gene_name)) %>% 
-> >   dplyr::select(external_gene_name) %>% 
-> >   dplyr::distinct() %>% 
-> >   nrow()
-> > ~~~
-> > {: .language-r}
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 2
+
+How many human genes are we removing that don't have identified orthologs? 
+:::::::::::::::::::::::: solution 
+
+```r
+dplyr::filter(module_table, is.na(Mouse_gene_name)) %>% 
+  dplyr::select(external_gene_name) %>% 
+  dplyr::distinct() %>% 
+  nrow()
+```
+
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Reading differential expression result of human data from meta-analysis
 
@@ -750,71 +761,76 @@ significantly up-regulated in the 5xFAD model. These significant positive
 correlation suggests that the 5xFAD model captures inflammatory changes observed 
 in human AD patients.
 
-> ## Challenge 3
-> Considering the LOAD1 (i.e. APOE4.Trem2) model results, which modules show correlation and how does it compare with 5xFAD? 
->
-> > ## Solution to Challenge 2
-> >
-> > ~~~
-> > load("../results/DEAnalysis_LOAD1.Rdata")
-> > model_vs_ampad <- inner_join(DE_LOAD1.df, ampad_modules_fc, by = c("symbol"), multiple = "all") 
-> > cor.df <- model_vs_ampad %>%
-> >   dplyr::select(module, model, sex, age, symbol, log2FoldChange, ampad_fc) %>%
-> >   group_by(module, model, sex, age) %>%
-> >   nest(data = c(symbol, log2FoldChange, ampad_fc)) %>% 
-> >   mutate(
-> >       cor_test = map(data, ~ cor.test(.x[["log2FoldChange"]], 
-> >                                       .x[["ampad_fc"]], method = "pearson")),
-> >       estimate = map_dbl(cor_test, "estimate"),
-> >       p_value = map_dbl(cor_test, "p.value")
-> >       ) %>%
-> >   ungroup() %>%
-> >   dplyr::select(-cor_test)
-> > model_module <- cor.df %>%
-> >     mutate(significant = p_value < 0.05) %>%
-> >     left_join(module_clusters, by = "module") %>%
-> >     dplyr::select(cluster, cluster_label, module, model, sex, age,
-> >                   correlation = estimate, p_value, significant)
-> > order.model <- c("APOE4 (Male)", "APOE4 (Female)","Trem2 (Male)", "Trem2 (Female)","APOE4Trem2 (Male)", "APOE4Trem2 (Female)")
-> > correlation_for_plot <- model_module %>%
-> >     arrange(cluster) %>%
-> >     mutate(
-> >       module = factor(module,levels=mod),
-> >       model_sex = glue::glue("{model} ({str_to_title(sex)})"),
-> >    ) %>%
-> >     arrange(model_sex) %>%
-> >     mutate(
-> >       age = factor(age, levels = c(4,8)),
-> >       model_sex = factor(model_sex,levels=order.model),
-> >       model_sex = fct_rev(model_sex),
-> >     )
-> > data <- correlation_for_plot
-> > ggplot2::ggplot() +
-> >   ggplot2::geom_tile(data = data, ggplot2::aes(x = .data$module, y = .data$model_sex), colour = "black", fill = "white") +
-> >   ggplot2::geom_point(data = dplyr::filter(data), ggplot2::aes(x = .data$module, y = .data$model_sex, colour = > > .data$correlation, size = abs(.data$correlation))) +
-> >   ggplot2::geom_point(data = dplyr::filter(data, .data$significant), ggplot2::aes(x = .data$module, y = .data$model_sex, colour = .data$correlation),color="black",shape=0,size=9) +
-> >   ggplot2::scale_x_discrete(position = "top") +
-> >   ggplot2::scale_size(guide = "none", limits = c(0, 0.4)) +
-> >   ggplot2::scale_color_gradient2(limits = c(-0.5, 0.5), low = "#85070C", high = "#164B6E", name = "Correlation", guide = ggplot2::guide_colorbar(ticks = FALSE)) +
-> >   ggplot2::labs(x = NULL, y = NULL) +
-> >   ggplot2::facet_grid( rows = dplyr::vars(.data$age),cols = dplyr::vars(.data$cluster_label), scales = "free", space = "free",switch = 'y') +
-> >   ggplot2::theme(
-> >     strip.text.x = ggplot2::element_text(size = 10,colour = c("black")),
-> >     strip.text.y.left = ggplot2::element_text(angle = 0,size = 12),
-> >     axis.ticks = ggplot2::element_blank(),
-> >     axis.text.x = ggplot2::element_text(angle = 90, hjust = 0, size = 12),
-> >     axis.text.y = ggplot2::element_text(angle = 0, size = 12),
-> >     panel.background = ggplot2::element_blank(),
-> >     plot.title = ggplot2::element_text(angle = 0, vjust = -54, hjust = 0.03,size=12,face="bold"),
-> >     plot.title.position = "plot",
-> >     panel.grid = ggplot2::element_blank(),
-> >     legend.position = "right"
-> >   )
-> > ~~~
-> > {: .language-r}
-> > The LOAD1 models show weaker correlation to AMP-AD module gene expression overall, and in particular anti-correlation for Consensus Cluster B (immune) modules.
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 3
+
+Considering the LOAD1 (i.e. APOE4.Trem2) model results, which modules show correlation and how does it compare with 5xFAD? 
+
+:::::::::::::::::::::::: solution 
+
+```r
+ load("../results/DEAnalysis_LOAD1.Rdata")
+ model_vs_ampad <- inner_join(DE_LOAD1.df, ampad_modules_fc, by = c("symbol"), multiple = "all") 
+ cor.df <- model_vs_ampad %>%
+   dplyr::select(module, model, sex, age, symbol, log2FoldChange, ampad_fc) %>%
+   group_by(module, model, sex, age) %>%
+   nest(data = c(symbol, log2FoldChange, ampad_fc)) %>% 
+   mutate(
+       cor_test = map(data, ~ cor.test(.x[["log2FoldChange"]], 
+                                       .x[["ampad_fc"]], method = "pearson")),
+       estimate = map_dbl(cor_test, "estimate"),
+       p_value = map_dbl(cor_test, "p.value")
+       ) %>%
+   ungroup() %>%
+   dplyr::select(-cor_test)
+ model_module <- cor.df %>%
+     mutate(significant = p_value < 0.05) %>%
+     left_join(module_clusters, by = "module") %>%
+     dplyr::select(cluster, cluster_label, module, model, sex, age,
+                   correlation = estimate, p_value, significant)
+ order.model <- c("APOE4 (Male)", "APOE4 (Female)","Trem2 (Male)", "Trem2 (Female)","APOE4Trem2 (Male)", "APOE4Trem2 (Female)")
+ correlation_for_plot <- model_module %>%
+     arrange(cluster) %>%
+     mutate(
+       module = factor(module,levels=mod),
+       model_sex = glue::glue("{model} ({str_to_title(sex)})"),
+    ) %>%
+     arrange(model_sex) %>%
+     mutate(
+       age = factor(age, levels = c(4,8)),
+       model_sex = factor(model_sex,levels=order.model),
+       model_sex = fct_rev(model_sex),
+     )
+ data <- correlation_for_plot
+ ggplot2::ggplot() +
+   ggplot2::geom_tile(data = data, ggplot2::aes(x = .data$module, y = .data$model_sex), colour = "black", fill = "white") +
+   ggplot2::geom_point(data = dplyr::filter(data), ggplot2::aes(x = .data$module, y = .data$model_sex, colour =  .data$correlation, size = abs(.data$correlation))) +
+   ggplot2::geom_point(data = dplyr::filter(data, .data$significant), ggplot2::aes(x = .data$module, y = .data$model_sex, colour = .data$correlation),color="black",shape=0,size=9) +
+   ggplot2::scale_x_discrete(position = "top") +
+   ggplot2::scale_size(guide = "none", limits = c(0, 0.4)) +
+   ggplot2::scale_color_gradient2(limits = c(-0.5, 0.5), low = "#85070C", high = "#164B6E", name = "Correlation", guide = ggplot2::guide_colorbar(ticks = FALSE)) +
+   ggplot2::labs(x = NULL, y = NULL) +
+   ggplot2::facet_grid( rows = dplyr::vars(.data$age),cols = dplyr::vars(.data$cluster_label), scales = "free", space = "free",switch = 'y') +
+   ggplot2::theme(
+     strip.text.x = ggplot2::element_text(size = 10,colour = c("black")),
+     strip.text.y.left = ggplot2::element_text(angle = 0,size = 12),
+     axis.ticks = ggplot2::element_blank(),
+     axis.text.x = ggplot2::element_text(angle = 90, hjust = 0, size = 12),
+     axis.text.y = ggplot2::element_text(angle = 0, size = 12),
+     panel.background = ggplot2::element_blank(),
+     plot.title = ggplot2::element_text(angle = 0, vjust = -54, hjust = 0.03,size=12,face="bold"),
+     plot.title.position = "plot",
+     panel.grid = ggplot2::element_blank(),
+     legend.position = "right"
+   )
+```
+The LOAD1 models show weaker correlation to AMP-AD module gene expression overall, and in particular anti-correlation for Consensus Cluster B (immune) modules.
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Detecting functional coherence of gene sets from omics data
 
@@ -971,18 +987,23 @@ enr.up@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length(
 enr.dn@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 ```
 
-> ## Challenge 4
-> 1) How many significant terms are identified from the up-regulated gene list if you do not specify the "universe"?   
->
-> > ## Solution to Challenge 1
-> >
-> > ~~~
-> > enrichGO(gene.list.up, ont = 'all', OrgDb = org.Mm.eg.db, keyType = 'SYMBOL') %>% 
-> >   .@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()  
-> > ~~~
-> > {: .language-r}
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 4
+
+How many significant terms are identified from the up-regulated gene list if you do not specify the "universe"?
+
+:::::::::::::::::::::::: solution 
+
+```r
+ enrichGO(gene.list.up, ont = 'all', OrgDb = org.Mm.eg.db, keyType = 'SYMBOL') %>% 
+   .@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()  
+```
+
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 Plot the top 10 significant terms:  
 
@@ -1039,18 +1060,23 @@ How many significant terms are identified:
 enr@result %>% filter(p.adjust <= 0.05) %>% pull(ID) %>% unique() %>% length()
 ```
 
-> ## Challenge 5
-> 1) The tally above represents all genes, both up- and down-regulatd. To compare between GSEA and ORA, can you identify how many GSEA enriched terms are associated with up-regulated genes and how many are associated with down-regulated genes? (Hint: the `NES` value within the results relates to the directionality of enrichment). 
->
-> > ## Solution to Challenge 2
-> >
-> > ~~~
-> > enr@result %>% filter(p.adjust <= 0.05, NES < 0) %>% pull(ID) %>% unique() %>% length()  
-> > enr@result %>% filter(p.adjust <= 0.05, NES > 0) %>% pull(ID) %>% unique() %>% length()
-> > ~~~
-> > {: .language-r}
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 5
+
+The tally above represents all genes, both up- and down-regulatd. To compare between GSEA and ORA, can you identify how many GSEA enriched terms are associated with up-regulated genes and how many are associated with down-regulated genes? (Hint: the `NES` value within the results relates to the directionality of enrichment). 
+
+:::::::::::::::::::::::: solution 
+
+```r
+ enr@result %>% filter(p.adjust <= 0.05, NES < 0) %>% pull(ID) %>% unique() %>% length()  
+ enr@result %>% filter(p.adjust <= 0.05, NES > 0) %>% pull(ID) %>% unique() %>% length()
+```
+
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 Plot the term enrichments
 
@@ -1245,44 +1271,50 @@ ggplot(enr.bd_plot, aes(NES, Biodomain)) +
 
 ![ridgeplot](../results/biodom_plot.png)
 
-> ## Challenge 6
-> How could you plot the results from the ORA to show biodomain enrichements?
->
-> > ## Solution to Challenge 6
-> > enr.ora = bind_rows(
-> >  enr.up@result %>% mutate(dir = 'up'),
-> >  enr.dn@result %>% mutate(dir = 'dn')
-> >  ) %>% 
-> >  left_join(., biodom %>% select(Biodomain, ID = GO_ID), by = 'ID') %>% 
-> >  relocate(Biodomain)
-> >
-> > enr.ora$Biodomain[is.na(enr.ora$Biodomain)] <- 'none'
-> > 
-> > bd.tally = tibble(domain = c(unique(biodom$Biodomain), 'none')) %>% 
-> >   rowwise() %>% 
-> >   mutate(
-> >     n_term = biodom$GO_ID[ biodom$Biodomain == domain ] %>% unique() %>% length(),
-> >     n_sig_term = enr.ora$ID[ enr.ora$Biodomain == domain ] %>% unique() %>% length()
-> >     )
-> >
-> > enr.ora <- full_join(enr.ora, dom.lab, by = c('Biodomain' = 'domain')) %>% 
-> >   mutate(Biodomain = factor(Biodomain, levels = arrange(bd.tally, n_sig_term) %>% pull(domain))) %>% 
-> >   arrange(Biodomain, p.adjust) %>% 
-> >   mutate(signed_logP = -log10(p.adjust),
-> >          signed_logP = if_else(dir == 'dn', -1*signed_logP, signed_logP))
-> >   
-> > ggplot(enr.ora, aes(signed_logP, Biodomain)) +
-> >   geom_violin(data = subset(enr.ora, dir == 'up'), aes(color = color), scale = 'width')+
-> >   geom_violin(data = subset(enr.ora, dir == 'dn'), aes(color = color), scale = 'width')+
-> >   geom_jitter(aes(size = Count, fill = color), color = 'grey20', shape = 21, alpha = .3)+
-> >   geom_vline(xintercept = 0, lwd = .1)+
-> >   scale_y_discrete(drop = F)+
-> >   scale_fill_identity()+scale_color_identity()
-> > ~~~
-> > {: .language-r}
-> > Based on the gene list (up or down) we can add a sign to the significance. When we plot this we can see there are many more significantly enriched terms from the ORA. The dominant signal is still the up-regulation of terms from the `Immune Response` biodomain. There is also nearly exclusive up-regulation of terms from the `Autophagy`, `Metal Binding and Homeostasis`, `Oxidative Stress`, and `APP Metabolism` domains. The most down-regulated terms are from the `Synapse` biodomain.
-> {: .solution}
-{: .challenge}
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 6
+
+How could you plot the results from the ORA to show biodomain enrichements?
+:::::::::::::::::::::::: solution 
+
+```r
+ enr.ora = bind_rows(
+  enr.up@result %>% mutate(dir = 'up'),
+  enr.dn@result %>% mutate(dir = 'dn')
+  ) %>% 
+  left_join(., biodom %>% select(Biodomain, ID = GO_ID), by = 'ID') %>% 
+  relocate(Biodomain)
+
+ enr.ora$Biodomain[is.na(enr.ora$Biodomain)] <- 'none'
+ 
+ bd.tally = tibble(domain = c(unique(biodom$Biodomain), 'none')) %>% 
+   rowwise() %>% 
+   mutate(
+     n_term = biodom$GO_ID[ biodom$Biodomain == domain ] %>% unique() %>% length(),
+     n_sig_term = enr.ora$ID[ enr.ora$Biodomain == domain ] %>% unique() %>% length()
+     )
+
+ enr.ora <- full_join(enr.ora, dom.lab, by = c('Biodomain' = 'domain')) %>% 
+   mutate(Biodomain = factor(Biodomain, levels = arrange(bd.tally, n_sig_term) %>% pull(domain))) %>% 
+   arrange(Biodomain, p.adjust) %>% 
+   mutate(signed_logP = -log10(p.adjust),
+          signed_logP = if_else(dir == 'dn', -1*signed_logP, signed_logP))
+   
+ ggplot(enr.ora, aes(signed_logP, Biodomain)) +
+   geom_violin(data = subset(enr.ora, dir == 'up'), aes(color = color), scale = 'width')+
+   geom_violin(data = subset(enr.ora, dir == 'dn'), aes(color = color), scale = 'width')+
+   geom_jitter(aes(size = Count, fill = color), color = 'grey20', shape = 21, alpha = .3)+
+   geom_vline(xintercept = 0, lwd = .1)+
+   scale_y_discrete(drop = F)+
+   scale_fill_identity()+scale_color_identity()
+```
+Based on the gene list (up or down) we can add a sign to the significance. When we plot this we can see there are many more significantly enriched terms from the ORA. The dominant signal is still the up-regulation of terms from the `Immune Response` biodomain. There is also nearly exclusive up-regulation of terms from the `Autophagy`, `Metal Binding and Homeostasis`, `Oxidative Stress`, and `APP Metabolism` domains. The most down-regulated terms are from the `Synapse` biodomain.
+
+:::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Comparing Human and Mouse functional enrichments
 
