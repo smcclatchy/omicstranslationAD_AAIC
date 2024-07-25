@@ -525,15 +525,35 @@ corresponding module<br></li>
 <span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> </span></code></pre>
 </div>
-<blockquote>
-<h2 id="challenge-1">Challenge 1</h2>
+<div id="challenge-1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-1" class="callout-inner">
+<h3 class="callout-title">Challenge 1<a class="anchor" aria-label="anchor" href="#challenge-1"></a>
+</h3>
+<div class="callout-content">
 <p>What are other ways to count genes in each module?</p>
-<blockquote>
-<h2 id="solution-to-challenge-1">Solution to Challenge 1</h2>
-<pre><code><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">module_table</span> ,<span class="va">Module</span><span class="op">)</span></span></code></pre>
-<p>{: .language-r} {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">module_table</span> ,<span class="va">Module</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>We can also check the total number of unique genes in the table</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -604,19 +624,29 @@ that contain a mouse ortholog mapping:</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">ampad_modules</span><span class="op">)</span></span></code></pre>
 </div>
-<blockquote>
-<h2 id="challenge-2">Challenge 2</h2>
+<div id="challenge-2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-2" class="callout-inner">
+<h3 class="callout-title">Challenge 2<a class="anchor" aria-label="anchor" href="#challenge-2"></a>
+</h3>
+<div class="callout-content">
 <p>How many human genes are we removing that don’t have identified
-orthologs?</p>
-<blockquote>
-<h2 id="solution-to-challenge-2">Solution to Challenge 2</h2>
-<pre><code><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">module_table</span>, <span class="fu">is.na</span><span class="op">(</span><span class="va">Mouse_gene_name</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">external_gene_name</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">distinct</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+orthologs? :::::::::::::::::::::::: solution</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">module_table</span>, <span class="fu">is.na</span><span class="op">(</span><span class="va">Mouse_gene_name</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">external_gene_name</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">distinct</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">nrow</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>{: .language-r} {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
 </div>
 </section><section><h2 class="section-heading" id="reading-differential-expression-result-of-human-data-from-meta-analysis">Reading differential expression result of human data from
 meta-analysis<a class="anchor" aria-label="anchor" href="#reading-differential-expression-result-of-human-data-from-meta-analysis"></a>
@@ -1107,71 +1137,92 @@ Clec7a are up-regulated at both ages). We also saw in the Volcano plot
 that immune-related genes were significantly up-regulated in the 5xFAD
 model. These significant positive correlation suggests that the 5xFAD
 model captures inflammatory changes observed in human AD patients.</p>
-<blockquote>
-<h2 id="challenge-3">Challenge 3</h2>
+<div id="challenge-3" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-3" class="callout-inner">
+<h3 class="callout-title">Challenge 3<a class="anchor" aria-label="anchor" href="#challenge-3"></a>
+</h3>
+<div class="callout-content">
 <p>Considering the LOAD1 (i.e. APOE4.Trem2) model results, which modules
 show correlation and how does it compare with 5xFAD?</p>
-<blockquote>
-<h2 id="solution-to-challenge-2-1">Solution to Challenge 2</h2>
-<pre><code>load("../results/DEAnalysis_LOAD1.Rdata")
-model_vs_ampad &lt;- inner_join(DE_LOAD1.df, ampad_modules_fc, by = c("symbol"), multiple = "all")
-cor.df &lt;- model_vs_ampad %&gt;%
-  dplyr::select(module, model, sex, age, symbol, log2FoldChange, ampad_fc) %&gt;%
-  group_by(module, model, sex, age) %&gt;%
-  nest(data = c(symbol, log2FoldChange, ampad_fc)) %&gt;%
-  mutate(
-      cor_test = map(data, ~ cor.test(.x[["log2FoldChange"]],
-                                      .x[["ampad_fc"]], method = "pearson")),
-      estimate = map_dbl(cor_test, "estimate"),
-      p_value = map_dbl(cor_test, "p.value")
-      ) %&gt;%
-  ungroup() %&gt;%
-  dplyr::select(-cor_test)
-model_module &lt;- cor.df %&gt;%
-    mutate(significant = p_value &lt; 0.05) %&gt;%
-    left_join(module_clusters, by = "module") %&gt;%
-    dplyr::select(cluster, cluster_label, module, model, sex, age,
-                  correlation = estimate, p_value, significant)
-order.model &lt;- c("APOE4 (Male)", "APOE4 (Female)","Trem2 (Male)", "Trem2 (Female)","APOE4Trem2 (Male)", "APOE4Trem2 (Female)")
-correlation_for_plot &lt;- model_module %&gt;%
-    arrange(cluster) %&gt;%
-    mutate(
-      module = factor(module,levels=mod),
-      model_sex = glue::glue("{model} ({str_to_title(sex)})"),
-   ) %&gt;%
-    arrange(model_sex) %&gt;%
-    mutate(
-      age = factor(age, levels = c(4,8)),
-      model_sex = factor(model_sex,levels=order.model),
-      model_sex = fct_rev(model_sex),
-    )
-data &lt;- correlation_for_plot
-ggplot2::ggplot() +
-  ggplot2::geom_tile(data = data, ggplot2::aes(x = .data$module, y = .data$model_sex), colour = "black", fill = "white") +
-  ggplot2::geom_point(data = dplyr::filter(data), ggplot2::aes(x = .data$module, y = .data$model_sex, colour = &gt; &gt; .data$correlation, size = abs(.data$correlation))) +
-  ggplot2::geom_point(data = dplyr::filter(data, .data$significant), ggplot2::aes(x = .data$module, y = .data$model_sex, colour = .data$correlation),color="black",shape=0,size=9) +
-  ggplot2::scale_x_discrete(position = "top") +
-  ggplot2::scale_size(guide = "none", limits = c(0, 0.4)) +
-  ggplot2::scale_color_gradient2(limits = c(-0.5, 0.5), low = "#85070C", high = "#164B6E", name = "Correlation", guide = ggplot2::guide_colorbar(ticks = FALSE)) +
-  ggplot2::labs(x = NULL, y = NULL) +
-  ggplot2::facet_grid( rows = dplyr::vars(.data$age),cols = dplyr::vars(.data$cluster_label), scales = "free", space = "free",switch = 'y') +
-  ggplot2::theme(
-    strip.text.x = ggplot2::element_text(size = 10,colour = c("black")),
-    strip.text.y.left = ggplot2::element_text(angle = 0,size = 12),
-    axis.ticks = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(angle = 90, hjust = 0, size = 12),
-    axis.text.y = ggplot2::element_text(angle = 0, size = 12),
-    panel.background = ggplot2::element_blank(),
-    plot.title = ggplot2::element_text(angle = 0, vjust = -54, hjust = 0.03,size=12,face="bold"),
-    plot.title.position = "plot",
-    panel.grid = ggplot2::element_blank(),
-    legend.position = "right"
-  )</code></pre>
-<p>{: .language-r} The LOAD1 models show weaker correlation to AMP-AD
-module gene expression overall, and in particular anti-correlation for
-Consensus Cluster B (immune) modules. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb44">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="fu">load</span><span class="op">(</span><span class="st">"../results/DEAnalysis_LOAD1.Rdata"</span><span class="op">)</span></span>
+<span> <span class="va">model_vs_ampad</span> <span class="op">&lt;-</span> <span class="fu">inner_join</span><span class="op">(</span><span class="va">DE_LOAD1.df</span>, <span class="va">ampad_modules_fc</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"symbol"</span><span class="op">)</span>, multiple <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span> </span>
+<span> <span class="va">cor.df</span> <span class="op">&lt;-</span> <span class="va">model_vs_ampad</span> <span class="op">%&gt;%</span></span>
+<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">module</span>, <span class="va">model</span>, <span class="va">sex</span>, <span class="va">age</span>, <span class="va">symbol</span>, <span class="va">log2FoldChange</span>, <span class="va">ampad_fc</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>   <span class="fu">group_by</span><span class="op">(</span><span class="va">module</span>, <span class="va">model</span>, <span class="va">sex</span>, <span class="va">age</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>   <span class="fu">nest</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="va">symbol</span>, <span class="va">log2FoldChange</span>, <span class="va">ampad_fc</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">mutate</span><span class="op">(</span></span>
+<span>       cor_test <span class="op">=</span> <span class="fu">map</span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu">cor.test</span><span class="op">(</span><span class="va">.x</span><span class="op">[[</span><span class="st">"log2FoldChange"</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>                                       <span class="va">.x</span><span class="op">[[</span><span class="st">"ampad_fc"</span><span class="op">]</span><span class="op">]</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       estimate <span class="op">=</span> <span class="fu">map_dbl</span><span class="op">(</span><span class="va">cor_test</span>, <span class="st">"estimate"</span><span class="op">)</span>,</span>
+<span>       p_value <span class="op">=</span> <span class="fu">map_dbl</span><span class="op">(</span><span class="va">cor_test</span>, <span class="st">"p.value"</span><span class="op">)</span></span>
+<span>       <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>   <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">cor_test</span><span class="op">)</span></span>
+<span> <span class="va">model_module</span> <span class="op">&lt;-</span> <span class="va">cor.df</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">mutate</span><span class="op">(</span>significant <span class="op">=</span> <span class="va">p_value</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">left_join</span><span class="op">(</span><span class="va">module_clusters</span>, by <span class="op">=</span> <span class="st">"module"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">cluster</span>, <span class="va">cluster_label</span>, <span class="va">module</span>, <span class="va">model</span>, <span class="va">sex</span>, <span class="va">age</span>,</span>
+<span>                   correlation <span class="op">=</span> <span class="va">estimate</span>, <span class="va">p_value</span>, <span class="va">significant</span><span class="op">)</span></span>
+<span> <span class="va">order.model</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"APOE4 (Male)"</span>, <span class="st">"APOE4 (Female)"</span>,<span class="st">"Trem2 (Male)"</span>, <span class="st">"Trem2 (Female)"</span>,<span class="st">"APOE4Trem2 (Male)"</span>, <span class="st">"APOE4Trem2 (Female)"</span><span class="op">)</span></span>
+<span> <span class="va">correlation_for_plot</span> <span class="op">&lt;-</span> <span class="va">model_module</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">arrange</span><span class="op">(</span><span class="va">cluster</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">mutate</span><span class="op">(</span></span>
+<span>       module <span class="op">=</span> <span class="fu">factor</span><span class="op">(</span><span class="va">module</span>,levels<span class="op">=</span><span class="va">mod</span><span class="op">)</span>,</span>
+<span>       model_sex <span class="op">=</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu">glue</span><span class="op">(</span><span class="st">"{model} ({str_to_title(sex)})"</span><span class="op">)</span>,</span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">arrange</span><span class="op">(</span><span class="va">model_sex</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>     <span class="fu">mutate</span><span class="op">(</span></span>
+<span>       age <span class="op">=</span> <span class="fu">factor</span><span class="op">(</span><span class="va">age</span>, levels <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">4</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       model_sex <span class="op">=</span> <span class="fu">factor</span><span class="op">(</span><span class="va">model_sex</span>,levels<span class="op">=</span><span class="va">order.model</span><span class="op">)</span>,</span>
+<span>       model_sex <span class="op">=</span> <span class="fu">fct_rev</span><span class="op">(</span><span class="va">model_sex</span><span class="op">)</span>,</span>
+<span>     <span class="op">)</span></span>
+<span> <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">correlation_for_plot</span></span>
+<span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_tile</span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">module</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">model_sex</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">data</span><span class="op">)</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">module</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">model_sex</span>, colour <span class="op">=</span>  <span class="va">.data</span><span class="op">$</span><span class="va">correlation</span>, size <span class="op">=</span> <span class="fu">abs</span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">correlation</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">data</span>, <span class="va">.data</span><span class="op">$</span><span class="va">significant</span><span class="op">)</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">module</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">model_sex</span>, colour <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">correlation</span><span class="op">)</span>,color<span class="op">=</span><span class="st">"black"</span>,shape<span class="op">=</span><span class="fl">0</span>,size<span class="op">=</span><span class="fl">9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_x_discrete</span><span class="op">(</span>position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_size</span><span class="op">(</span>guide <span class="op">=</span> <span class="st">"none"</span>, limits <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_color_gradient2</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, low <span class="op">=</span> <span class="st">"#85070C"</span>, high <span class="op">=</span> <span class="st">"#164B6E"</span>, name <span class="op">=</span> <span class="st">"Correlation"</span>, guide <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">guide_colorbar</span><span class="op">(</span>ticks <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">facet_grid</span><span class="op">(</span> rows <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">vars</span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>,cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">vars</span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">cluster_label</span><span class="op">)</span>, scales <span class="op">=</span> <span class="st">"free"</span>, space <span class="op">=</span> <span class="st">"free"</span>,switch <span class="op">=</span> <span class="st">'y'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">theme</span><span class="op">(</span></span>
+<span>     strip.text.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span>,colour <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"black"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>     strip.text.y.left <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span>,size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
+<span>     axis.ticks <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     axis.text.x <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
+<span>     axis.text.y <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span>, size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>,</span>
+<span>     panel.background <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     plot.title <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">0</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">54</span>, hjust <span class="op">=</span> <span class="fl">0.03</span>,size<span class="op">=</span><span class="fl">12</span>,face<span class="op">=</span><span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>     plot.title.position <span class="op">=</span> <span class="st">"plot"</span>,</span>
+<span>     panel.grid <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     legend.position <span class="op">=</span> <span class="st">"right"</span></span>
+<span>   <span class="op">)</span></span></code></pre>
+</div>
+<p>The LOAD1 models show weaker correlation to AMP-AD module gene
+expression overall, and in particular anti-correlation for Consensus
+Cluster B (immune) modules.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="detecting-functional-coherence-of-gene-sets-from-omics-data">Detecting functional coherence of gene sets from omics data<a class="anchor" aria-label="anchor" href="#detecting-functional-coherence-of-gene-sets-from-omics-data"></a>
 <a class="anchor" aria-label="anchor" href="#detecting-functional-coherence-of-gene-sets-from-omics-data"></a></h2>
@@ -1335,17 +1386,37 @@ set.</p>
 <code class="sourceCode R"><span><span class="va">enr.up</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">enr.dn</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<blockquote>
-<h2 id="challenge-4">Challenge 4</h2>
-<ol style="list-style-type: decimal"><li>How many significant terms are identified from the up-regulated gene
-list if you do not specify the “universe”?</li>
-</ol><blockquote>
-<h2 id="solution-to-challenge-1-1">Solution to Challenge 1</h2>
-<pre><code><span><span class="fu">enrichGO</span><span class="op">(</span><span class="va">gene.list.up</span>, ont <span class="op">=</span> <span class="st">'all'</span>, OrgDb <span class="op">=</span> <span class="va">org.Mm.eg.db</span>, keyType <span class="op">=</span> <span class="st">'SYMBOL'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="va">.</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span>  </span></code></pre>
-<p>{: .language-r} {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+<div id="challenge-4" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-4" class="callout-inner">
+<h3 class="callout-title">Challenge 4<a class="anchor" aria-label="anchor" href="#challenge-4"></a>
+</h3>
+<div class="callout-content">
+<p>How many significant terms are identified from the up-regulated gene
+list if you do not specify the “universe”?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb54">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="fu">enrichGO</span><span class="op">(</span><span class="va">gene.list.up</span>, ont <span class="op">=</span> <span class="st">'all'</span>, OrgDb <span class="op">=</span> <span class="va">org.Mm.eg.db</span>, keyType <span class="op">=</span> <span class="st">'SYMBOL'</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="va">.</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span>  </span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Plot the top 10 significant terms:</p>
 <div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1401,20 +1472,40 @@ genes in the list.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">enr</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<blockquote>
-<h2 id="challenge-5">Challenge 5</h2>
-<ol style="list-style-type: decimal"><li>The tally above represents all genes, both up- and down-regulatd. To
+<div id="challenge-5" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="challenge-5" class="callout-inner">
+<h3 class="callout-title">Challenge 5<a class="anchor" aria-label="anchor" href="#challenge-5"></a>
+</h3>
+<div class="callout-content">
+<p>The tally above represents all genes, both up- and down-regulatd. To
 compare between GSEA and ORA, can you identify how many GSEA enriched
 terms are associated with up-regulated genes and how many are associated
 with down-regulated genes? (Hint: the <code>NES</code> value within the
-results relates to the directionality of enrichment).</li>
-</ol><blockquote>
-<h2 id="solution-to-challenge-2-2">Solution to Challenge 2</h2>
-<pre><code><span><span class="va">enr</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span>, <span class="va">NES</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">enr</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span>, <span class="va">NES</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-<p>{: .language-r} {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+results relates to the directionality of enrichment).</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb59">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="va">enr</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span>, <span class="va">NES</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span>  </span>
+<span> <span class="va">enr</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">filter</span><span class="op">(</span><span class="va">p.adjust</span> <span class="op">&lt;=</span> <span class="fl">0.05</span>, <span class="va">NES</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">ID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Plot the term enrichments</p>
 <div class="codewrapper sourceCode" id="cb60">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1611,47 +1702,63 @@ those that do, the vast majority map into the
 <span>  <span class="fu">scale_fill_identity</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">scale_color_identity</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <figure><img src="../results/biodom_plot.png" alt="ridgeplot" class="figure mx-auto d-block"><div class="figcaption">ridgeplot</div>
-</figure><blockquote>
-<h2 id="challenge-6">Challenge 6</h2>
+</figure><div id="challenge-6" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="challenge-6" class="callout-inner">
+<h3 class="callout-title">Challenge 6<a class="anchor" aria-label="anchor" href="#challenge-6"></a>
+</h3>
+<div class="callout-content">
 <p>How could you plot the results from the ORA to show biodomain
-enrichements?</p>
-<blockquote>
-<h2 id="solution-to-challenge-6">Solution to Challenge 6</h2>
-<p>enr.ora = bind_rows( <a href="mailto:enr.up@result" class="email">enr.up@result</a> %&gt;% mutate(dir = ‘up’), <a href="mailto:enr.dn@result" class="email">enr.dn@result</a> %&gt;%
-mutate(dir = ‘dn’) ) %&gt;% left_join(., biodom %&gt;% select(Biodomain,
-ID = GO_ID), by = ‘ID’) %&gt;% relocate(Biodomain)</p>
-<p>enr.ora<span class="math inline">\(Biodomain[is.na(enr.ora\)</span>Biodomain)] &lt;-
-‘none’</p>
-<p>bd.tally = tibble(domain = c(unique(biodom<span class="math inline">\(Biodomain), 'none')) %&gt;%
-  rowwise() %&gt;%
-  mutate(
-    n_term = biodom\)</span>GO_ID[ biodom<span class="math inline">\(Biodomain == domain ] %&gt;% unique() %&gt;%
-length(),
-    n_sig_term = enr.ora\)</span>ID[ enr.ora$Biodomain == domain ]
-%&gt;% unique() %&gt;% length() )</p>
-<p>enr.ora &lt;- full_join(enr.ora, dom.lab, by = c(‘Biodomain’ =
-‘domain’)) %&gt;% mutate(Biodomain = factor(Biodomain, levels =
-arrange(bd.tally, n_sig_term) %&gt;% pull(domain))) %&gt;%
-arrange(Biodomain, p.adjust) %&gt;% mutate(signed_logP =
--log10(p.adjust), signed_logP = if_else(dir == ‘dn’, -1*signed_logP,
-signed_logP))</p>
-<p>ggplot(enr.ora, aes(signed_logP, Biodomain)) + geom_violin(data =
-subset(enr.ora, dir == ‘up’), aes(color = color), scale = ‘width’)+
-geom_violin(data = subset(enr.ora, dir == ‘dn’), aes(color = color),
-scale = ‘width’)+ geom_jitter(aes(size = Count, fill = color), color =
-‘grey20’, shape = 21, alpha = .3)+ geom_vline(xintercept = 0, lwd = .1)+
-scale_y_discrete(drop = F)+ scale_fill_identity()+scale_color_identity()
-~~~ {: .language-r} Based on the gene list (up or down) we can add a
-sign to the significance. When we plot this we can see there are many
-more significantly enriched terms from the ORA. The dominant signal is
-still the up-regulation of terms from the <code>Immune Response</code>
+enrichements? :::::::::::::::::::::::: solution</p>
+<div class="codewrapper sourceCode" id="cb69">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span> <span class="va">enr.ora</span> <span class="op">=</span> <span class="fu">bind_rows</span><span class="op">(</span></span>
+<span>  <span class="va">enr.up</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>dir <span class="op">=</span> <span class="st">'up'</span><span class="op">)</span>,</span>
+<span>  <span class="va">enr.dn</span><span class="op">@</span><span class="va">result</span> <span class="op">%&gt;%</span> <span class="fu">mutate</span><span class="op">(</span>dir <span class="op">=</span> <span class="st">'dn'</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">.</span>, <span class="va">biodom</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Biodomain</span>, ID <span class="op">=</span> <span class="va">GO_ID</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'ID'</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">Biodomain</span><span class="op">)</span></span>
+<span></span>
+<span> <span class="va">enr.ora</span><span class="op">$</span><span class="va">Biodomain</span><span class="op">[</span><span class="fu">is.na</span><span class="op">(</span><span class="va">enr.ora</span><span class="op">$</span><span class="va">Biodomain</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'none'</span></span>
+<span> </span>
+<span> <span class="va">bd.tally</span> <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span>domain <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fu">unique</span><span class="op">(</span><span class="va">biodom</span><span class="op">$</span><span class="va">Biodomain</span><span class="op">)</span>, <span class="st">'none'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">mutate</span><span class="op">(</span></span>
+<span>     n_term <span class="op">=</span> <span class="va">biodom</span><span class="op">$</span><span class="va">GO_ID</span><span class="op">[</span> <span class="va">biodom</span><span class="op">$</span><span class="va">Biodomain</span> <span class="op">==</span> <span class="va">domain</span> <span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     n_sig_term <span class="op">=</span> <span class="va">enr.ora</span><span class="op">$</span><span class="va">ID</span><span class="op">[</span> <span class="va">enr.ora</span><span class="op">$</span><span class="va">Biodomain</span> <span class="op">==</span> <span class="va">domain</span> <span class="op">]</span> <span class="op">%&gt;%</span> <span class="fu">unique</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">length</span><span class="op">(</span><span class="op">)</span></span>
+<span>     <span class="op">)</span></span>
+<span></span>
+<span> <span class="va">enr.ora</span> <span class="op">&lt;-</span> <span class="fu">full_join</span><span class="op">(</span><span class="va">enr.ora</span>, <span class="va">dom.lab</span>, by <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">'Biodomain'</span> <span class="op">=</span> <span class="st">'domain'</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">mutate</span><span class="op">(</span>Biodomain <span class="op">=</span> <span class="fu">factor</span><span class="op">(</span><span class="va">Biodomain</span>, levels <span class="op">=</span> <span class="fu">arrange</span><span class="op">(</span><span class="va">bd.tally</span>, <span class="va">n_sig_term</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">domain</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">arrange</span><span class="op">(</span><span class="va">Biodomain</span>, <span class="va">p.adjust</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>   <span class="fu">mutate</span><span class="op">(</span>signed_logP <span class="op">=</span> <span class="op">-</span><span class="fu">log10</span><span class="op">(</span><span class="va">p.adjust</span><span class="op">)</span>,</span>
+<span>          signed_logP <span class="op">=</span> <span class="fu">if_else</span><span class="op">(</span><span class="va">dir</span> <span class="op">==</span> <span class="st">'dn'</span>, <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="va">signed_logP</span>, <span class="va">signed_logP</span><span class="op">)</span><span class="op">)</span></span>
+<span>   </span>
+<span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">enr.ora</span>, <span class="fu">aes</span><span class="op">(</span><span class="va">signed_logP</span>, <span class="va">Biodomain</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>   <span class="fu">geom_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">subset</span><span class="op">(</span><span class="va">enr.ora</span>, <span class="va">dir</span> <span class="op">==</span> <span class="st">'up'</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">color</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">'width'</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">geom_violin</span><span class="op">(</span>data <span class="op">=</span> <span class="fu">subset</span><span class="op">(</span><span class="va">enr.ora</span>, <span class="va">dir</span> <span class="op">==</span> <span class="st">'dn'</span><span class="op">)</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">color</span><span class="op">)</span>, scale <span class="op">=</span> <span class="st">'width'</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">geom_jitter</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>size <span class="op">=</span> <span class="va">Count</span>, fill <span class="op">=</span> <span class="va">color</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">'grey20'</span>, shape <span class="op">=</span> <span class="fl">21</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span>, lwd <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">scale_y_discrete</span><span class="op">(</span>drop <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu">scale_fill_identity</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">scale_color_identity</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Based on the gene list (up or down) we can add a sign to the
+significance. When we plot this we can see there are many more
+significantly enriched terms from the ORA. The dominant signal is still
+the up-regulation of terms from the <code>Immune Response</code>
 biodomain. There is also nearly exclusive up-regulation of terms from
 the <code>Autophagy</code>, <code>Metal Binding and Homeostasis</code>,
 <code>Oxidative Stress</code>, and <code>APP Metabolism</code> domains.
 The most down-regulated terms are from the <code>Synapse</code>
-biodomain. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+biodomain.</p>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::::::::::::::</p>
 </div>
 <div class="section level3">
 <h3 id="comparing-human-and-mouse-functional-enrichments">Comparing Human and Mouse functional enrichments<a class="anchor" aria-label="anchor" href="#comparing-human-and-mouse-functional-enrichments"></a></h3>
@@ -1660,7 +1767,7 @@ in the mouse models with functional enrichments from the AMP-AD cohorts.
 We can first take a look at the functional enrichments from the
 different human cohorts. To save some time, let’s load some pre-computed
 enrichment results for mouse &amp; human data.</p>
-<div class="codewrapper sourceCode" id="cb69">
+<div class="codewrapper sourceCode" id="cb70">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1675,7 +1782,7 @@ enrichment results for mouse &amp; human data.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in bind_rows(read_tsv("data/5xFAD_gsea_results.tsv", col_types = cols()) %&gt;% : could not find function "bind_rows"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb71">
+<div class="codewrapper sourceCode" id="cb72">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1687,7 +1794,7 @@ enrichment results for mouse &amp; human data.</p>
 <pre class="error" tabindex="0"><code>Error in read_tsv("data/Hsap_gsea_results.tsv", col_types = cols()): could not find function "read_tsv"</code></pre>
 </div>
 <p>The cohorts and tissues available are:</p>
-<div class="codewrapper sourceCode" id="cb73">
+<div class="codewrapper sourceCode" id="cb74">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1700,7 +1807,7 @@ enrichment results for mouse &amp; human data.</p>
 </div>
 <p>We can focus on one tissue per cohort, let’s look at TCX for Mayo,
 PHG for Mt Sinai, and DLPFC for ROSMAP.</p>
-<div class="codewrapper sourceCode" id="cb75">
+<div class="codewrapper sourceCode" id="cb76">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1737,7 +1844,7 @@ doesn’t have very many enriched terms. Let’s ignore the ROSMAP result
 for now and compare the terms enriched between Mayo TCX and the 5xFAD
 males. First we can join up the enriched terms between the sets into one
 data frame.</p>
-<div class="codewrapper sourceCode" id="cb76">
+<div class="codewrapper sourceCode" id="cb77">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1762,7 +1869,7 @@ data frame.</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in bind_rows(hs.gsea %&gt;% filter(Study == "MAYO", Tissue == "TCX") %&gt;% : could not find function "%&gt;%"</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb78">
+<div class="codewrapper sourceCode" id="cb79">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1774,7 +1881,7 @@ data frame.</p>
 <pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'comb_5x' not found</code></pre>
 </div>
 <p>Great! Now let’s annotate the biodomains and plot it up:</p>
-<div class="codewrapper sourceCode" id="cb80">
+<div class="codewrapper sourceCode" id="cb81">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1835,33 +1942,33 @@ more granular comparisons.</li>
 </div>
 </section><section><h2 class="section-heading" id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 <a class="anchor" aria-label="anchor" href="#session-info"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb81">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb82">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
-<span id="cb81-3"><a href="#cb81-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
-<span id="cb81-4"><a href="#cb81-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
-<span id="cb81-5"><a href="#cb81-5" tabindex="-1"></a></span>
-<span id="cb81-6"><a href="#cb81-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
-<span id="cb81-7"><a href="#cb81-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
-<span id="cb81-8"><a href="#cb81-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
-<span id="cb81-9"><a href="#cb81-9" tabindex="-1"></a></span>
-<span id="cb81-10"><a href="#cb81-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
-<span id="cb81-11"><a href="#cb81-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
-<span id="cb81-12"><a href="#cb81-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
-<span id="cb81-13"><a href="#cb81-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
-<span id="cb81-14"><a href="#cb81-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
-<span id="cb81-15"><a href="#cb81-15" tabindex="-1"></a></span>
-<span id="cb81-16"><a href="#cb81-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
-<span id="cb81-17"><a href="#cb81-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
-<span id="cb81-18"><a href="#cb81-18" tabindex="-1"></a></span>
-<span id="cb81-19"><a href="#cb81-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
-<span id="cb81-20"><a href="#cb81-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span id="cb81-21"><a href="#cb81-21" tabindex="-1"></a></span>
-<span id="cb81-22"><a href="#cb81-22" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
-<span id="cb81-23"><a href="#cb81-23" tabindex="-1"></a>[<span class="dv">1</span>] compiler_4.<span class="fl">4.1</span>  tools_4.<span class="fl">4.1</span>     yaml_2.<span class="fl">3.9</span>      knitr_1<span class="fl">.48</span>     </span>
-<span id="cb81-24"><a href="#cb81-24" tabindex="-1"></a>[<span class="dv">5</span>] xfun_0<span class="fl">.46</span>       renv_1.<span class="fl">0.7</span>      evaluate_0.<span class="fl">24.0</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
+<span id="cb82-4"><a href="#cb82-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
+<span id="cb82-5"><a href="#cb82-5" tabindex="-1"></a></span>
+<span id="cb82-6"><a href="#cb82-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
+<span id="cb82-7"><a href="#cb82-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
+<span id="cb82-8"><a href="#cb82-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
+<span id="cb82-9"><a href="#cb82-9" tabindex="-1"></a></span>
+<span id="cb82-10"><a href="#cb82-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
+<span id="cb82-11"><a href="#cb82-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
+<span id="cb82-12"><a href="#cb82-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
+<span id="cb82-13"><a href="#cb82-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
+<span id="cb82-14"><a href="#cb82-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
+<span id="cb82-15"><a href="#cb82-15" tabindex="-1"></a></span>
+<span id="cb82-16"><a href="#cb82-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
+<span id="cb82-17"><a href="#cb82-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
+<span id="cb82-18"><a href="#cb82-18" tabindex="-1"></a></span>
+<span id="cb82-19"><a href="#cb82-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
+<span id="cb82-20"><a href="#cb82-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span id="cb82-21"><a href="#cb82-21" tabindex="-1"></a></span>
+<span id="cb82-22"><a href="#cb82-22" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
+<span id="cb82-23"><a href="#cb82-23" tabindex="-1"></a>[<span class="dv">1</span>] compiler_4.<span class="fl">4.1</span>  tools_4.<span class="fl">4.1</span>     yaml_2.<span class="fl">3.9</span>      knitr_1<span class="fl">.48</span>     </span>
+<span id="cb82-24"><a href="#cb82-24" tabindex="-1"></a>[<span class="dv">5</span>] xfun_0<span class="fl">.46</span>       renv_1.<span class="fl">0.7</span>      evaluate_0.<span class="fl">24.0</span></span></code></pre>
 </div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
