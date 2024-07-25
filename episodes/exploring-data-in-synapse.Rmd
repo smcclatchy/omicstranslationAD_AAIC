@@ -20,8 +20,8 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ```{r, echo=FALSE}
-library(dplyr)
-library(tidyverse)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyverse))
 ```
 ## Working with AD Portal metadata 
 
