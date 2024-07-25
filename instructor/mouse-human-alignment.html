@@ -542,7 +542,7 @@ corresponding module<br></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -642,7 +642,7 @@ orthologs?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1154,7 +1154,7 @@ show correlation and how does it compare with 5xFAD?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1382,7 +1382,7 @@ list if you do not specify the “universe”?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1471,7 +1471,7 @@ results relates to the directionality of enrichment).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1698,7 +1698,7 @@ enrichements?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1763,39 +1763,33 @@ enrichment results for mouse &amp; human data.</p>
 <span>  <span class="fu">read_tsv</span><span class="op">(</span><span class="st">'data/5xFAD_gsea_results.tsv'</span>, col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span>age <span class="op">=</span> <span class="fu">str_remove_all</span><span class="op">(</span><span class="va">age</span>, <span class="st">' mo'</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">as.double</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="fu">read_tsv</span><span class="op">(</span><span class="st">'data/LOAD1_gsea_results.tsv'</span>, col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in bind_rows(read_tsv("data/5xFAD_gsea_results.tsv", col_types = cols()) %&gt;% : could not find function "bind_rows"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb66">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hs.gsea</span> <span class="op">&lt;-</span> <span class="fu">read_tsv</span><span class="op">(</span><span class="st">'data/Hsap_gsea_results.tsv'</span>, col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in read_tsv("data/Hsap_gsea_results.tsv", col_types = cols()): could not find function "read_tsv"</code></pre>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">hs.gsea</span> <span class="op">&lt;-</span> <span class="fu">read_tsv</span><span class="op">(</span><span class="st">'data/Hsap_gsea_results.tsv'</span>, col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>The cohorts and tissues available are:</p>
-<div class="codewrapper sourceCode" id="cb68">
+<div class="codewrapper sourceCode" id="cb65">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hs.gsea</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">Study</span>, <span class="va">Tissue</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">distinct</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in hs.gsea %&gt;% select(Study, Tissue) %&gt;% distinct(): could not find function "%&gt;%"</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 6 × 2
+  Study  Tissue
+  &lt;chr&gt;  &lt;chr&gt;
+1 MAYO   CBE
+2 MAYO   TCX
+3 MSSM   STG
+4 MSSM   PHG
+5 MSSM   IFG
+6 ROSMAP DLPFC </code></pre>
 </div>
 <p>We can focus on one tissue per cohort, let’s look at TCX for Mayo,
 PHG for Mt Sinai, and DLPFC for ROSMAP.</p>
-<div class="codewrapper sourceCode" id="cb70">
+<div class="codewrapper sourceCode" id="cb67">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1832,7 +1826,7 @@ doesn’t have very many enriched terms. Let’s ignore the ROSMAP result
 for now and compare the terms enriched between Mayo TCX and the 5xFAD
 males. First we can join up the enriched terms between the sets into one
 data frame.</p>
-<div class="codewrapper sourceCode" id="cb71">
+<div class="codewrapper sourceCode" id="cb68">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1850,26 +1844,26 @@ data frame.</p>
 <span>              values_from <span class="op">=</span> <span class="va">NES</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">unnest</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="va">hs</span>,<span class="va">mm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="va">hs</span>,<span class="va">mm</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">if_else</span><span class="op">(</span><span class="fu">is.na</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<span>  <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="va">hs</span>,<span class="va">mm</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">if_else</span><span class="op">(</span><span class="fu">is.na</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu">head</span><span class="op">(</span><span class="va">comb_5x</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in bind_rows(hs.gsea %&gt;% filter(Study == "MAYO", Tissue == "TCX") %&gt;% : could not find function "%&gt;%"</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb73">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">head</span><span class="op">(</span><span class="va">comb_5x</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'comb_5x' not found</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 6 × 4
+  ID         Description                                 hs    mm
+  &lt;chr&gt;      &lt;chr&gt;                                    &lt;dbl&gt; &lt;dbl&gt;
+1 GO:0001568 blood vessel development                  3.20     0
+2 GO:0048514 blood vessel morphogenesis                3.18     0
+3 GO:0001944 vasculature development                   3.17     0
+4 GO:0001525 angiogenesis                              3.16     0
+5 GO:0062023 collagen-containing extracellular matrix  3.15     0
+6 GO:0042060 wound healing                             3.06     0</code></pre>
 </div>
 <p>Great! Now let’s annotate the biodomains and plot it up:</p>
-<div class="codewrapper sourceCode" id="cb75">
+<div class="codewrapper sourceCode" id="cb70">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1930,33 +1924,45 @@ more granular comparisons.</li>
 </div>
 </section><section><h2 class="section-heading" id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 <a class="anchor" aria-label="anchor" href="#session-info"></a></h2>
-<hr class="half-width"><div class="codewrapper sourceCode" id="cb76">
+<hr class="half-width"><div class="codewrapper sourceCode" id="cb71">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
-<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
-<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
-<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a></span>
-<span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
-<span id="cb76-7"><a href="#cb76-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
-<span id="cb76-8"><a href="#cb76-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
-<span id="cb76-9"><a href="#cb76-9" tabindex="-1"></a></span>
-<span id="cb76-10"><a href="#cb76-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
-<span id="cb76-11"><a href="#cb76-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
-<span id="cb76-12"><a href="#cb76-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
-<span id="cb76-13"><a href="#cb76-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
-<span id="cb76-14"><a href="#cb76-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
-<span id="cb76-15"><a href="#cb76-15" tabindex="-1"></a></span>
-<span id="cb76-16"><a href="#cb76-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
-<span id="cb76-17"><a href="#cb76-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
-<span id="cb76-18"><a href="#cb76-18" tabindex="-1"></a></span>
-<span id="cb76-19"><a href="#cb76-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
-<span id="cb76-20"><a href="#cb76-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span id="cb76-21"><a href="#cb76-21" tabindex="-1"></a></span>
-<span id="cb76-22"><a href="#cb76-22" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
-<span id="cb76-23"><a href="#cb76-23" tabindex="-1"></a>[<span class="dv">1</span>] compiler_4.<span class="fl">4.1</span>  tools_4.<span class="fl">4.1</span>     yaml_2.<span class="fl">3.9</span>      knitr_1<span class="fl">.48</span>     </span>
-<span id="cb76-24"><a href="#cb76-24" tabindex="-1"></a>[<span class="dv">5</span>] xfun_0<span class="fl">.46</span>       renv_1.<span class="fl">0.7</span>      evaluate_0.<span class="fl">24.0</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a>R version <span class="dv">4</span>.<span class="fl">4.1</span> (<span class="dv">2024-06-14</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" tabindex="-1"></a>Platform<span class="sc">:</span> x86_64<span class="sc">-</span>pc<span class="sc">-</span>linux<span class="sc">-</span>gnu</span>
+<span id="cb71-4"><a href="#cb71-4" tabindex="-1"></a>Running under<span class="sc">:</span> Ubuntu <span class="dv">22</span>.<span class="fl">04.4</span> LTS</span>
+<span id="cb71-5"><a href="#cb71-5" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" tabindex="-1"></a>Matrix products<span class="sc">:</span> default</span>
+<span id="cb71-7"><a href="#cb71-7" tabindex="-1"></a>BLAS<span class="sc">:</span>   <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>blas<span class="sc">/</span>libblas.so.<span class="dv">3</span>.<span class="fl">10.0</span> </span>
+<span id="cb71-8"><a href="#cb71-8" tabindex="-1"></a>LAPACK<span class="sc">:</span> <span class="er">/</span>usr<span class="sc">/</span>lib<span class="sc">/</span>x86_64<span class="sc">-</span>linux<span class="sc">-</span>gnu<span class="sc">/</span>lapack<span class="sc">/</span>liblapack.so.<span class="dv">3</span>.<span class="fl">10.0</span></span>
+<span id="cb71-9"><a href="#cb71-9" tabindex="-1"></a></span>
+<span id="cb71-10"><a href="#cb71-10" tabindex="-1"></a>locale<span class="sc">:</span></span>
+<span id="cb71-11"><a href="#cb71-11" tabindex="-1"></a> [<span class="dv">1</span>] LC_CTYPE<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NUMERIC<span class="ot">=</span>C           LC_TIME<span class="ot">=</span>C.UTF<span class="dv">-8</span>       </span>
+<span id="cb71-12"><a href="#cb71-12" tabindex="-1"></a> [<span class="dv">4</span>] LC_COLLATE<span class="ot">=</span>C.UTF<span class="dv">-8</span>     LC_MONETARY<span class="ot">=</span>C.UTF<span class="dv">-8</span>    LC_MESSAGES<span class="ot">=</span>C.UTF<span class="dv">-8</span>   </span>
+<span id="cb71-13"><a href="#cb71-13" tabindex="-1"></a> [<span class="dv">7</span>] LC_PAPER<span class="ot">=</span>C.UTF<span class="dv">-8</span>       LC_NAME<span class="ot">=</span>C              LC_ADDRESS<span class="ot">=</span>C          </span>
+<span id="cb71-14"><a href="#cb71-14" tabindex="-1"></a>[<span class="dv">10</span>] LC_TELEPHONE<span class="ot">=</span>C         LC_MEASUREMENT<span class="ot">=</span>C.UTF<span class="dv">-8</span> LC_IDENTIFICATION<span class="ot">=</span>C   </span>
+<span id="cb71-15"><a href="#cb71-15" tabindex="-1"></a></span>
+<span id="cb71-16"><a href="#cb71-16" tabindex="-1"></a>time zone<span class="sc">:</span> UTC</span>
+<span id="cb71-17"><a href="#cb71-17" tabindex="-1"></a>tzcode source<span class="sc">:</span> <span class="fu">system</span> (glibc)</span>
+<span id="cb71-18"><a href="#cb71-18" tabindex="-1"></a></span>
+<span id="cb71-19"><a href="#cb71-19" tabindex="-1"></a>attached base packages<span class="sc">:</span></span>
+<span id="cb71-20"><a href="#cb71-20" tabindex="-1"></a>[<span class="dv">1</span>] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span id="cb71-21"><a href="#cb71-21" tabindex="-1"></a></span>
+<span id="cb71-22"><a href="#cb71-22" tabindex="-1"></a>other attached packages<span class="sc">:</span></span>
+<span id="cb71-23"><a href="#cb71-23" tabindex="-1"></a> [<span class="dv">1</span>] data.table_1.<span class="fl">15.4</span> lubridate_1.<span class="fl">9.3</span>   forcats_1.<span class="fl">0.0</span>     stringr_1.<span class="fl">5.1</span>    </span>
+<span id="cb71-24"><a href="#cb71-24" tabindex="-1"></a> [<span class="dv">5</span>] dplyr_1.<span class="fl">1.4</span>       purrr_1.<span class="fl">0.2</span>       readr_2.<span class="fl">1.5</span>       tidyr_1.<span class="fl">3.1</span>      </span>
+<span id="cb71-25"><a href="#cb71-25" tabindex="-1"></a> [<span class="dv">9</span>] tibble_3.<span class="fl">2.1</span>      tidyverse_2.<span class="fl">0.0</span>   ggplot2_3.<span class="fl">5.1</span>    </span>
+<span id="cb71-26"><a href="#cb71-26" tabindex="-1"></a></span>
+<span id="cb71-27"><a href="#cb71-27" tabindex="-1"></a>loaded via a <span class="fu">namespace</span> (and not attached)<span class="sc">:</span></span>
+<span id="cb71-28"><a href="#cb71-28" tabindex="-1"></a> [<span class="dv">1</span>] bit_4.<span class="fl">0.5</span>        gtable_0.<span class="fl">3.5</span>     crayon_1.<span class="fl">5.3</span>     compiler_4.<span class="fl">4.1</span>  </span>
+<span id="cb71-29"><a href="#cb71-29" tabindex="-1"></a> [<span class="dv">5</span>] renv_1.<span class="fl">0.7</span>       tidyselect_1.<span class="fl">2.1</span> parallel_4.<span class="fl">4.1</span>   scales_1.<span class="fl">3.0</span>    </span>
+<span id="cb71-30"><a href="#cb71-30" tabindex="-1"></a> [<span class="dv">9</span>] yaml_2.<span class="fl">3.9</span>       R6_2.<span class="fl">5.1</span>         generics_0.<span class="fl">1.3</span>   knitr_1<span class="fl">.48</span>      </span>
+<span id="cb71-31"><a href="#cb71-31" tabindex="-1"></a>[<span class="dv">13</span>] munsell_0.<span class="fl">5.1</span>    pillar_1.<span class="fl">9.0</span>     tzdb_0.<span class="fl">4.0</span>       rlang_1.<span class="fl">1.4</span>     </span>
+<span id="cb71-32"><a href="#cb71-32" tabindex="-1"></a>[<span class="dv">17</span>] utf8_1.<span class="fl">2.4</span>       stringi_1.<span class="fl">8.4</span>    xfun_0<span class="fl">.46</span>        bit64_4.<span class="fl">0.5</span>     </span>
+<span id="cb71-33"><a href="#cb71-33" tabindex="-1"></a>[<span class="dv">21</span>] timechange_0.<span class="fl">3.0</span> cli_3.<span class="fl">6.3</span>        withr_3.<span class="fl">0.0</span>      magrittr_2.<span class="fl">0.3</span>  </span>
+<span id="cb71-34"><a href="#cb71-34" tabindex="-1"></a>[<span class="dv">25</span>] grid_4.<span class="fl">4.1</span>       vroom_1.<span class="fl">6.5</span>      hms_1.<span class="fl">1.3</span>        lifecycle_1.<span class="fl">0.4</span> </span>
+<span id="cb71-35"><a href="#cb71-35" tabindex="-1"></a>[<span class="dv">29</span>] vctrs_0.<span class="fl">6.5</span>      evaluate_0.<span class="fl">24.0</span>  glue_1.<span class="fl">7.0</span>       fansi_1.<span class="fl">0.6</span>     </span>
+<span id="cb71-36"><a href="#cb71-36" tabindex="-1"></a>[<span class="dv">33</span>] colorspace_2<span class="fl">.1</span><span class="dv">-0</span> tools_4.<span class="fl">4.1</span>      pkgconfig_2.<span class="fl">0.3</span> </span></code></pre>
 </div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
