@@ -239,6 +239,7 @@ with the pipe, think of it as a shorthand for “take this (the preceding
 object) and do that (the subsequent command)”. See here (https://magrittr.tidyverse.org/) 
 for more info on piping in R.
 
+
 ``` r
 # join all the rows in the assay metadata that have a match in the biospecimen metadata
 joined_meta <- rna_meta %>% #start with the rnaseq assay metadata
@@ -392,15 +393,6 @@ counts %>%
   t() %>% 
   as_tibble(rownames = "specimenID") %>% 
   left_join(joined_meta, by = "specimenID")
-```
-
-``` warning
-Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if
-`.name_repair` is omitted as of tibble 2.0.0.
-ℹ Using compatibility `.name_repair`.
-This warning is displayed once every 8 hours.
-Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-generated.
 ```
 
 ``` output
