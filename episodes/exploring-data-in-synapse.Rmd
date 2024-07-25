@@ -145,6 +145,7 @@ and the %\>% operator from the magrittr package. If you are unfamiliar
 with the pipe, think of it as a shorthand for “take this (the preceding
 object) and do that (the subsequent command)”. See here (https://magrittr.tidyverse.org/) 
 for more info on piping in R.
+
 ```{r}
 # join all the rows in the assay metadata that have a match in the biospecimen metadata
 joined_meta <- rna_meta %>% #start with the rnaseq assay metadata
@@ -249,7 +250,7 @@ annotations_table %>%
 ```
 The multispecimen file should contain a row or column of specimenIDs that correspond to the specimenIDs used in a study’s metadata, as we have seen with the 5XFAD counts file.
 
-```{r}
+```{r, warning=FALSE}
 # In this example, we take a slice of the counts data to reduce computation, transpose it so that each row represents a single specimen, and then join it to the joined metadata by the specimenID
 counts %>% 
   slice_head(n = 5) %>% 
