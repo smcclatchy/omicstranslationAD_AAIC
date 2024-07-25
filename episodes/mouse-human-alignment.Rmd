@@ -930,7 +930,7 @@ load('results/DEAnalysis_5XFAD.RData')
 
 We'll start by considering the genes that are significantly DE in 12 month old 
 male animals
-```{r}
+```{r, eval=FALSE}
 gene.list.up <- DE_5xFAD.df %>% 
   filter(sex == 'male', 
          age == '12 mo',
