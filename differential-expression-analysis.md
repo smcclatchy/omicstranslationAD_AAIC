@@ -971,7 +971,7 @@ loaded via a namespace (and not attached):
  [9] lattice_0.22-5   R6_2.5.1         labeling_0.4.3   generics_0.1.3  
 [13] knitr_1.48       munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0      
 [17] rlang_1.1.4      utf8_1.2.4       stringi_1.8.4    xfun_0.46       
-[21] timechange_0.3.0 cli_3.6.3        withr_3.0.0      magrittr_2.0.3  
+[21] timechange_0.3.0 cli_3.6.3        withr_3.0.1      magrittr_2.0.3  
 [25] grid_4.4.1       hms_1.1.3        lifecycle_1.0.4  vctrs_0.6.5     
 [29] evaluate_0.24.0  glue_1.7.0       farver_2.1.2     fansi_1.0.6     
 [33] colorspace_2.1-1 tools_4.4.1      pkgconfig_2.0.3 
