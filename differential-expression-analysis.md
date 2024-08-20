@@ -970,7 +970,7 @@ loaded via a namespace (and not attached):
  [5] highr_0.11       tidyselect_1.2.1 scales_1.3.0     yaml_2.3.10     
  [9] lattice_0.22-5   R6_2.5.1         labeling_0.4.3   generics_0.1.3  
 [13] knitr_1.48       munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0      
-[17] rlang_1.1.4      utf8_1.2.4       stringi_1.8.4    xfun_0.46       
+[17] rlang_1.1.4      utf8_1.2.4       stringi_1.8.4    xfun_0.47       
 [21] timechange_0.3.0 cli_3.6.3        withr_3.0.1      magrittr_2.0.3  
 [25] grid_4.4.1       hms_1.1.3        lifecycle_1.0.4  vctrs_0.6.5     
 [29] evaluate_0.24.0  glue_1.7.0       farver_2.1.2     fansi_1.0.6     
