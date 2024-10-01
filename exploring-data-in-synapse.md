@@ -465,6 +465,6 @@ loaded via a namespace (and not attached):
 [17] utf8_1.2.4       stringi_1.8.4    xfun_0.47        bit64_4.5.2     
 [21] timechange_0.3.0 cli_3.6.3        withr_3.0.1      magrittr_2.0.3  
 [25] grid_4.4.1       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
-[29] vctrs_0.6.5      evaluate_1.0.0   glue_1.7.0       fansi_1.0.6     
+[29] vctrs_0.6.5      evaluate_1.0.0   glue_1.8.0       fansi_1.0.6     
 [33] colorspace_2.1-1 tools_4.4.1      pkgconfig_2.0.3 
 ```
