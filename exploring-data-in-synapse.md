@@ -462,7 +462,7 @@ loaded via a namespace (and not attached):
  [5] crayon_1.5.3     tidyselect_1.2.1 parallel_4.4.1   scales_1.3.0    
  [9] yaml_2.3.10      R6_2.5.1         generics_0.1.3   knitr_1.48      
 [13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
-[17] utf8_1.2.4       stringi_1.8.4    xfun_0.48        bit64_4.5.2     
+[17] utf8_1.2.4       stringi_1.8.4    xfun_0.49        bit64_4.5.2     
 [21] timechange_0.3.0 cli_3.6.3        withr_3.0.2      magrittr_2.0.3  
 [25] grid_4.4.1       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
 [29] vctrs_0.6.5      evaluate_1.0.1   glue_1.8.0       fansi_1.0.6     
