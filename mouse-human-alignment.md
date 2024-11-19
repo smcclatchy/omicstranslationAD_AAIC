@@ -1462,7 +1462,7 @@ granular comparisons.
 
 ``` r
 sessionInfo()
-R version 4.4.1 (2024-06-14)
+R version 4.4.2 (2024-10-31)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
@@ -1488,13 +1488,13 @@ other attached packages:
  [9] tibble_3.2.1      tidyverse_2.0.0   ggplot2_3.5.1    
 
 loaded via a namespace (and not attached):
- [1] bit_4.5.0        gtable_0.3.6     crayon_1.5.3     compiler_4.4.1  
- [5] renv_1.0.11      tidyselect_1.2.1 parallel_4.4.1   scales_1.3.0    
+ [1] bit_4.5.0        gtable_0.3.6     crayon_1.5.3     compiler_4.4.2  
+ [5] renv_1.0.11      tidyselect_1.2.1 parallel_4.4.2   scales_1.3.0    
  [9] yaml_2.3.10      R6_2.5.1         generics_0.1.3   knitr_1.49      
 [13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
 [17] utf8_1.2.4       stringi_1.8.4    xfun_0.49        bit64_4.5.2     
 [21] timechange_0.3.0 cli_3.6.3        withr_3.0.2      magrittr_2.0.3  
-[25] grid_4.4.1       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
+[25] grid_4.4.2       vroom_1.6.5      hms_1.1.3        lifecycle_1.0.4 
 [29] vctrs_0.6.5      evaluate_1.0.1   glue_1.8.0       fansi_1.0.6     
-[33] colorspace_2.1-1 tools_4.4.1      pkgconfig_2.0.3 
+[33] colorspace_2.1-1 tools_4.4.2      pkgconfig_2.0.3 
 ```

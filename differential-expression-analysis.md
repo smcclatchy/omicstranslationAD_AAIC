@@ -940,7 +940,7 @@ sessionInfo()
 ```
 
 ``` output
-R version 4.4.1 (2024-06-14)
+R version 4.4.2 (2024-10-31)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 22.04.5 LTS
 
@@ -966,15 +966,15 @@ other attached packages:
  [9] ggplot2_3.5.1   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
- [1] Matrix_1.7-1     gtable_0.3.6     compiler_4.4.1   renv_1.0.11     
+ [1] Matrix_1.7-1     gtable_0.3.6     compiler_4.4.2   renv_1.0.11     
  [5] tidyselect_1.2.1 scales_1.3.0     yaml_2.3.10      lattice_0.22-5  
  [9] R6_2.5.1         labeling_0.4.3   generics_0.1.3   knitr_1.49      
 [13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
 [17] utf8_1.2.4       stringi_1.8.4    xfun_0.49        timechange_0.3.0
-[21] cli_3.6.3        withr_3.0.2      magrittr_2.0.3   grid_4.4.1      
+[21] cli_3.6.3        withr_3.0.2      magrittr_2.0.3   grid_4.4.2      
 [25] hms_1.1.3        lifecycle_1.0.4  vctrs_0.6.5      evaluate_1.0.1  
 [29] glue_1.8.0       farver_2.1.2     fansi_1.0.6      colorspace_2.1-1
-[33] tools_4.4.1      pkgconfig_2.0.3 
+[33] tools_4.4.2      pkgconfig_2.0.3 
 ```
 
 
