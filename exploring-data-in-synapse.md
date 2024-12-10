@@ -453,12 +453,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   purrr_1.0.2    
+ [1] lubridate_1.9.4 forcats_1.0.0   stringr_1.5.1   purrr_1.0.2    
  [5] readr_2.1.5     tidyr_1.3.1     tibble_3.2.1    ggplot2_3.5.1  
  [9] tidyverse_2.0.0 dplyr_1.1.4    
 
 loaded via a namespace (and not attached):
- [1] bit_4.5.0        gtable_0.3.6     compiler_4.4.2   renv_1.0.11     
+ [1] bit_4.5.0.1      gtable_0.3.6     compiler_4.4.2   renv_1.0.11     
  [5] crayon_1.5.3     tidyselect_1.2.1 parallel_4.4.2   scales_1.3.0    
  [9] yaml_2.3.10      R6_2.5.1         generics_0.1.3   knitr_1.49      
 [13] munsell_0.5.1    pillar_1.9.0     tzdb_0.4.0       rlang_1.1.4     
